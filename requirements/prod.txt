@@ -1,0 +1,3 @@
+-r common.txt
+
+Django==1.8.6  # blessed version of django
