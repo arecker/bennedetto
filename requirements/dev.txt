@@ -1,0 +1,7 @@
+-r common.txt
+
+Django==1.8.6  # blessed version of django
+
+# Debugging packages
+ipython==4.0.0
+django-debug-toolbar==1.4
