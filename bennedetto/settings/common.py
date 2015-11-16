@@ -18,6 +18,7 @@ INSTALLED_APPS = (
     'compressor',
 
     # Project apps
+    'authenticating'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -62,3 +63,5 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+AUTH_USER_MODEL = 'authenticating.User'

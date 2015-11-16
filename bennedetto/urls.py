@@ -5,6 +5,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^$', login_required(TemplateView.as_view(template_name='home.html')))
+    url(r'^accounts/', include('authenticating.urls')),
+    url(r'^$', login_required(TemplateView.as_view(template_name='home.html')), name='home')
 ]
