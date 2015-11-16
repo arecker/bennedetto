@@ -1,2 +1,3 @@
-temp
+temp/*
+!temp/.keep
 *.pyc
