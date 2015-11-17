@@ -1,11 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html lang="en">{% load compress %}{% load staticfiles %}
   <head>
     <meta charset="UTF-8"/>
     <title>bennedetto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% compress css %}
+    <link href="{% static 'vendor.min.css' %}" rel="stylesheet"/>
+    {% block css %}
+    {% endblock %}
+    {% endcompress %}
   </head>
   <body>
     {% block content %}
     {% endblock %}
+    {% compress js %}
+    {% if DEBUG %}
+    <script type="text/javascript" src="{% static 'vendor-debug.js' %}"></script>
+    {% else %}
+    <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
+    {% endif %}
+    {% block scripts %}
+    {% endblock %}
+    {% endcompress %}
   </body>
 </html>
