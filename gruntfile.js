@@ -4,10 +4,12 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     'static/vendor.js': [
-                        'node_modules/angular/angular.min.js'
+                        'node_modules/angular/angular.min.js',
+                        'node_modules/angular-ui-bootstrap/ui-bootstrap.min.js'
                     ],
                     'static/vendor-debug.js': [
-                        'node_modules/angular/angular.js'
+                        'node_modules/angular/angular.js',
+                        'node_modules/angular-ui-bootstrap/ui-bootstrap.js'
                     ]
                 }
             }
