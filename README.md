@@ -50,4 +50,5 @@ id = models.UUIDField(primary_key=True,  # hanging indents
 
 ### JavaScript
 
-I'll add some more pedantic rules when I actually add some JavaScript : )
+* Address warnings raised by JSHint
+* Follow the [angular style guide](https://github.com/johnpapa/angular-styleguide), namely in IIF and named functions
