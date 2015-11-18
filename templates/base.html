@@ -10,7 +10,7 @@
     {% endblock %}
     {% endcompress %}
   </head>
-  <body>
+  <body {% block ng_app %}{% endblock %}>
     {% block content %}
     {% endblock %}
     {% compress js %}
@@ -19,7 +19,12 @@
     {% else %}
     <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
     {% endif %}
+    <script type="text/javascript" src="{% static 'js/polyfills.js' %}"></script>
     {% block scripts %}
+    {% endblock %}
+    {% endcompress %}
+    {% compress js inline %}
+    {% block scripts_inline %}
     {% endblock %}
     {% endcompress %}
   </body>

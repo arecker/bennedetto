@@ -5,10 +5,12 @@ module.exports = function(grunt) {
                 files: {
                     'static/vendor.js': [
                         'node_modules/angular/angular.min.js',
+                        'node_modules/angular-route/angular-route.min.js',
                         'node_modules/angular-ui-bootstrap/ui-bootstrap.min.js'
                     ],
                     'static/vendor-debug.js': [
                         'node_modules/angular/angular.js',
+                        'node_modules/angular-route/angular-route.js',
                         'node_modules/angular-ui-bootstrap/ui-bootstrap.js'
                     ]
                 }
@@ -25,7 +27,8 @@ module.exports = function(grunt) {
                 funcscope: true,
                 latedef: true,
                 maxparams: 5,
-                futurehostile: true
+                futurehostile: true,
+                validthis: true
             }
         },
         cssmin: {

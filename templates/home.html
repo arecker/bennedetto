@@ -1,6 +1,18 @@
 {% extends "base.html" %}{% load staticfiles %}
+{% block ng_app %}ng-app="bennedetto"{% endblock %}
 {% block content %}
+<ng-view></ng-view>
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="{% static 'app/app.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/services/static.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/controllers/today.js' %}"></script>
+{% endblock %}
+{% block scripts_inline %}
+<script type="text/javascript">
+ angular.module('bennedetto').constant('APP_SETTINGS', {
+     apiUrl: {{ API_URL }},
+     staticUrl: {{ STATIC_URL }}
+ });
+</script>
 {% endblock %}
