@@ -2,7 +2,7 @@
     'use strict';
 
     function RatesResource($resource, APP_SETTINGS) {
-        return $resource('{}{}'.format(APP_SETTINGS.apiUrl, 'rates'));
+        return $resource('{}{}/:id'.format(APP_SETTINGS.apiUrl, 'rates'));
     }
 
     angular

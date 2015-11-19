@@ -1,7 +1,11 @@
 (function() {
     'use strict';
 
-    function config($routeProvider, APP_SETTINGS) {
+    function config($routeProvider, $resourceProvider, $httpProvider, APP_SETTINGS) {
+        $resourceProvider.defaults.stripTrailingSlashes = false;
+        $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+        $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+
         $routeProvider
             .when('/', {
                 templateUrl: '{}app/partials/today.html'.format(APP_SETTINGS.staticUrl),
@@ -18,6 +22,6 @@
 
     angular
         .module('bennedetto', ['ngRoute', 'ngResource'])
-        .config(['$routeProvider', 'APP_SETTINGS', config]);
+        .config(['$routeProvider', '$resourceProvider', '$httpProvider', 'APP_SETTINGS', config]);
 
 }());

@@ -10,6 +10,11 @@ class RateSerializer(serializers.ModelSerializer):
 
 
 class RateCreateSerializer(serializers.ModelSerializer):
+    def create(self, valid_data):
+        request = self.context.get('request')
+        valid_data['user'] = request.user
+        return super(RateCreateSerializer, self).create(valid_data)
+
     class Meta:
         model = Rate
-        exclude = ('amount_per_day', )
+        exclude = ('amount_per_day', 'user')
