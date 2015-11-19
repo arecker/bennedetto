@@ -17,9 +17,11 @@ INSTALLED_APPS = (
 
     # 3rd party apps
     'compressor',
+    'rest_framework',
 
     # Project apps
-    'authenticating'
+    'authenticating',
+    'tracking'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -73,3 +75,9 @@ STATICFILES_DIRS = (
 )
 
 AUTH_USER_MODEL = 'authenticating.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
