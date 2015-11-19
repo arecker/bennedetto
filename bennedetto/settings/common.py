@@ -5,6 +5,7 @@ BASE_DIR = os.path.join(THIS_DIR, '..')
 
 INSTALLED_APPS = (
     # 3rd party admin apps
+    'flat',
 
     # Django apps
     'django.contrib.admin',
