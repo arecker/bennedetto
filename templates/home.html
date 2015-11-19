@@ -1,12 +1,16 @@
 {% extends "base.html" %}{% load staticfiles %}
 {% block ng_app %}ng-app="bennedetto"{% endblock %}
 {% block content %}
+<bd-navbar></bd-navbar>
 <ng-view></ng-view>
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="{% static 'app/app.js' %}"></script>
 <script type="text/javascript" src="{% static 'app/services/static.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/services/resource.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/directives/bd-navbar.js' %}"></script>
 <script type="text/javascript" src="{% static 'app/controllers/today.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/controllers/rates.js' %}"></script>
 {% endblock %}
 {% block scripts_inline %}
 <script type="text/javascript">

@@ -1,0 +1,4 @@
+<h1>Rates</h1>
+<ul ng-repeat="rate in ctrl.rates">
+  <li><bold>{{ rate.description }}</bold>: {{ rate.amount | currency }}</li>
+</ul>

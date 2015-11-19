@@ -3,7 +3,7 @@
 
     function partialFactory(staticUrl) {
         return function(template) {
-            return '{}{}'.format(staticUrl, template);
+            return '{}app/partials/{}'.format(staticUrl, template);
         };
     }
 
