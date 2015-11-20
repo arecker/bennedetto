@@ -7,5 +7,6 @@
   <tr ng-repeat="rate in ratesListCtrl.rates">
     <td>{{ rate.description }}</td>
     <td>{{ rate.amount | currency }}</td>
+    <td><button class="btn btn-danger btn-sm" ng-click="ratesListCtrl.delete(rate)">Delete</button></td>
   </tr>
 </table>

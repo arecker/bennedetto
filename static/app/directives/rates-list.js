@@ -16,10 +16,15 @@
 
     function RatesListController(RatesResource) {
         var self = this;
+
         self.reloadHandle = function() {
             RatesResource.query().$promise.then(function(d) {
                 self.rates = d;
             });
+        };
+
+        self.delete = function(res) {
+            RatesResource.delete(res).$promise.then(self.reloadHandle);
         };
 
         self.reloadHandle();
