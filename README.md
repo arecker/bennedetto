@@ -2,6 +2,8 @@
 
 The simple, turn-based budget.
 
+[![Build Status](https://travis-ci.org/arecker/bennedetto.svg)](https://travis-ci.org/arecker/bennedetto)
+
 ## Building
 
 To build the project, create a new virtual environment and activate it.

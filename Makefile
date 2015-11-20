@@ -15,4 +15,8 @@ run:
 	${manage} runserver
 shell:
 	${manage} shell
+test:
+	grunt test
+	${manage} test
 dev-bootstrap: install-dev migrate install-js build-js createsuperuser
+dev-bootstrap-headless: install-dev migrate install-js build-js

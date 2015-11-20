@@ -50,4 +50,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.registerTask('default', ['browserify', 'cssmin', 'jshint']);
+    grunt.registerTask('test', ['jshint']);
 };
