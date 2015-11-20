@@ -1,0 +1,11 @@
+<table class="table">
+  <tr>
+    <th>Description</th>
+    <th>Amount / Day</th>
+    <th>Action</th>
+  </tr>
+  <tr ng-repeat="rate in ratesListCtrl.rates">
+    <td>{{ rate.description }}</td>
+    <td>{{ rate.amount | currency }}</td>
+  </tr>
+</table>

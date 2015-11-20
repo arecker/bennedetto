@@ -16,15 +16,29 @@
 
         self.model = {};
 
-        self.save = function() {
+        self.submit = function() {
             RatesResource.save(self.model);
             self.model = {};
         };
 
     }
 
+    function min() {
+        return {
+            restrict: "A",
+            require: "ngModel",
+            link: function(scope, element, attributes, ngModel) {
+                ngModel.$validators.min = function(modelValue) {
+                    modelValue = Number(modelValue);
+                    return !isNaN(modelValue) && modelValue > 0;
+                };
+            }
+        };
+    }
+
     angular
         .module('bennedetto')
         .controller('RatesFormController', ['RatesResource', RatesFormController])
-        .directive('ratesForm', ['StaticService', ratesForm]);
+        .directive('ratesForm', ['StaticService', ratesForm])
+        .directive('min', [min]);
 }());
