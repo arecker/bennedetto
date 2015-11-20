@@ -1,2 +1,2 @@
-body { padding-top: 90px; }     /*static navbar padding required*/
+body { padding-top: 70px; }     /*static navbar padding required*/
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; } /*angular ui bootstrap required*/

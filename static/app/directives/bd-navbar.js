@@ -19,6 +19,12 @@
         self.isActive = function(path) {
             return path === $location.path();
         };
+
+        self.isCollapsed = false;
+
+        self.toggleNav = function() {
+            self.isCollapsed = !self.isCollapsed;
+        };
     }
 
     angular
