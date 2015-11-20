@@ -18,7 +18,7 @@ Next, navigate to the source root and run the bootstrap command.
 
 This will install local dependencies, perform local database migrations, and prompt you to create a superuser.
 
-To start the webserver, run the familier `python manage.py runserver` or use the alias provided in the Makefile
+To start the webserver, run the familiar `python manage.py runserver` or use the alias provided in the Makefile
 
     $ make run
 
@@ -95,4 +95,4 @@ _Example_:
 
 ### Personality
 
-* Don't be a jagweed.
+* Don't be a jagweed
