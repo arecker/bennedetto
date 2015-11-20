@@ -28,22 +28,9 @@
 
     }
 
-    function min() {
-        return {
-            restrict: "A",
-            require: "ngModel",
-            link: function(scope, element, attributes, ngModel) {
-                ngModel.$validators.min = function(modelValue) {
-                    modelValue = Number(modelValue);
-                    return !isNaN(modelValue) && modelValue > 0;
-                };
-            }
-        };
-    }
-
     angular
         .module('bennedetto')
         .controller('bdRatesFormController', ['RatesResource', bdRatesFormController])
-        .directive('bdRatesForm', ['StaticService', bdRatesForm])
-        .directive('min', [min]);
+        .directive('bdRatesForm', ['StaticService', bdRatesForm]);
+
 }());
