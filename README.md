@@ -11,9 +11,30 @@ To build the project, create a new virtual environment and activate it.
     $ virtualenv --no-site-packages ~/.virtualenvs/bennedetto
     $ source ~/.virtualenvs/bennedetto/bin/activate
 
-Next, while in the project directory issue the command `make dev-bootstrap`.  This will install the needed dependencies, perform the local database migrations, and prompt you to create a superuser.
+Next, navigate to the source root and run the bootstrap command.
 
-Start the local development webserver with `make run`
+    $ cd ~/git/bennedetto
+    $ make dev-bootstrap
+
+This will install local dependencies, perform local database migrations, and prompt you to create a superuser.
+
+To start the webserver, run the familier `python manage.py runserver` or use the alias provided in the Makefile
+
+    $ make run
+
+## Testing
+
+To run the serverside tests
+
+    $ python manage.py test
+
+To run the clientside tests
+
+    $ grunt test
+
+To run everything
+
+    $ make test
 
 ## Standards
 
@@ -71,3 +92,7 @@ _Example_:
         .something('MySomething', [MySomething]);
 }());
 ```
+
+### Personality
+
+* Don't be a jagweed.
