@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    function ratesForm(StaticService) {
+    function bdRatesForm(StaticService) {
         return  {
             restrict: 'E',
-            templateUrl: StaticService.partial('rates-form.html'),
-            controller: 'RatesFormController',
+            templateUrl: StaticService.partial('bd-rates-form.html'),
+            controller: 'bdRatesFormController',
             controllerAs: 'ratesFormCtrl',
             bindToController: true,
             scope: {
@@ -14,7 +14,7 @@
         };
     }
 
-    function RatesFormController(RatesResource) {
+    function bdRatesFormController(RatesResource) {
         var self = this;
 
         self.model = {};
@@ -43,7 +43,7 @@
 
     angular
         .module('bennedetto')
-        .controller('RatesFormController', ['RatesResource', RatesFormController])
-        .directive('ratesForm', ['StaticService', ratesForm])
+        .controller('bdRatesFormController', ['RatesResource', bdRatesFormController])
+        .directive('bdRatesForm', ['StaticService', bdRatesForm])
         .directive('min', [min]);
 }());

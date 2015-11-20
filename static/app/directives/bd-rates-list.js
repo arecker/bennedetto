@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    function RatesList(StaticService) {
+    function bdRatesList(StaticService) {
         return {
             restrict: 'E',
-            templateUrl: StaticService.partial('rates-list.html'),
-            controller: 'RatesListController',
+            templateUrl: StaticService.partial('bd-rates-list.html'),
+            controller: 'bdRatesListController',
             controllerAs: 'ratesListCtrl',
             bindToController: true,
             scope: {
@@ -14,7 +14,7 @@
         };
     }
 
-    function RatesListController(RatesResource) {
+    function bdRatesListController(RatesResource) {
         var self = this;
 
         self.reloadHandle = function() {
@@ -32,6 +32,6 @@
 
     angular
         .module('bennedetto')
-        .controller('RatesListController', ['RatesResource', RatesListController])
-        .directive('ratesList', ['StaticService', RatesList]);
+        .controller('bdRatesListController', ['RatesResource', bdRatesListController])
+        .directive('bdRatesList', ['StaticService', bdRatesList]);
 }());
