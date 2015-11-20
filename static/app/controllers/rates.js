@@ -3,7 +3,6 @@
 
     function RatesController(RatesResource) {
         var self = this;
-        self.rates = RatesResource.query();
     }
 
     angular

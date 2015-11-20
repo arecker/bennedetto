@@ -7,7 +7,10 @@
             templateUrl: StaticService.partial('rates-form.html'),
             controller: 'RatesFormController',
             controllerAs: 'ratesFormCtrl',
-            bindToController: true
+            bindToController: true,
+            scope: {
+                afterSubmit: '=?'
+            }
         };
     }
 
@@ -16,8 +19,10 @@
 
         self.model = {};
 
+        self.afterSubmit = self.afterSubmit || angular.noop;
+
         self.submit = function() {
-            RatesResource.save(self.model);
+            RatesResource.save(self.model).$promise.then(self.afterSubmit);
             self.model = {};
         };
 

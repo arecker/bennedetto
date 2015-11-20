@@ -7,14 +7,22 @@
             templateUrl: StaticService.partial('rates-list.html'),
             controller: 'RatesListController',
             controllerAs: 'ratesListCtrl',
-            bindToController: true
+            bindToController: true,
+            scope: {
+                reloadHandle: '=?'
+            }
         };
     }
 
     function RatesListController(RatesResource) {
         var self = this;
+        self.reloadHandle = function() {
+            RatesResource.query().$promise.then(function(d) {
+                self.rates = d;
+            });
+        };
 
-        self.rates = RatesResource.query();
+        self.reloadHandle();
     }
 
     angular
