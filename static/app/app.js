@@ -21,7 +21,7 @@
     }
 
     angular
-        .module('bennedetto', ['ngRoute', 'ngResource'])
+        .module('bennedetto', ['ngRoute', 'ngResource', 'ui.bootstrap'])
         .config(['$routeProvider', '$resourceProvider', '$httpProvider', 'APP_SETTINGS', config]);
 
 }());
