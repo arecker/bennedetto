@@ -6,17 +6,23 @@
             restrict: 'E',
             templateUrl: StaticService.partial('bd-navbar.html'),
             controller: 'bdNavbarController',
-            controllerAs: 'ctrl',
+            controllerAs: 'navCtrl',
             bindToController: true
         };
     }
 
-    function bdNavbarController() {
+    function bdNavbarController($location, APP_SETTINGS) {
+        var self = this;
 
+        self.version = APP_SETTINGS.version;
+
+        self.isActive = function(path) {
+            return path === $location.path();
+        };
     }
 
     angular
         .module('bennedetto')
-        .controller('bdNavbarController', [bdNavbarController])
+        .controller('bdNavbarController', ['$location', 'APP_SETTINGS', bdNavbarController])
         .directive('bdNavbar', ['StaticService', bdNavbar]);
 }());

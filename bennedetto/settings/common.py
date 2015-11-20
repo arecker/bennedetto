@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 THIS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.join(THIS_DIR, '..')
@@ -81,3 +82,12 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     )
 }
+
+try:
+    VERSION = (subprocess.Popen(['git', 'describe'],
+                                stdout=subprocess.PIPE)
+               .communicate()[0]
+               .rstrip('\n'))
+except:
+    VERSION = 'v0.0'
+    print('Could not determine git version')

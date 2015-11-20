@@ -1,8 +1,10 @@
 {% extends "base.html" %}{% load staticfiles %}
 {% block ng_app %}ng-app="bennedetto"{% endblock %}
 {% block content %}
-<bd-navbar></bd-navbar>
-<ng-view></ng-view>
+<div class="container-fluid">
+  <bd-navbar></bd-navbar>
+  <ng-view></ng-view>
+</div>
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="{% static 'app/app.js' %}"></script>
@@ -17,8 +19,9 @@
 {% block scripts_inline %}
 <script type="text/javascript">
  angular.module('bennedetto').constant('APP_SETTINGS', {
-     apiUrl: {{ API_URL }},
-     staticUrl: {{ STATIC_URL }}
+     apiUrl: '{{ API_URL }}',
+     staticUrl: '{{ STATIC_URL }}',
+     version: '{{ VERSION }}'
  });
 </script>
 {% endblock %}

@@ -1,4 +1,20 @@
-<nav>
-  <a href="/#/">Today</a>
-  <a href="/#/rates">Rates</a>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#/">bennedetto</a>
+      <p ng-bind="navCtrl.version" class="navbar-text navbar-right"></p>
+    </div>
+    <div class="collapse navbar-collapse" uib-collapse="navbarCollapsed">
+      <ul class="nav navbar-nav">
+        <li ng-class="{'active': navCtrl.isActive('/')}"><a ng-click="navbarCollapsed = !navbarCollapsed" href="/#/">Today</a></li>
+        <li ng-class="{'active': navCtrl.isActive('/rates')}"><a ng-click="navbarCollapsed = !navbarCollapsed" href="/#/rates">Rates</a></li>
+      </ul>
+    </div>
+  </div>
 </nav>
