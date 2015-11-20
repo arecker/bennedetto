@@ -53,4 +53,21 @@ id = models.UUIDField(primary_key=True,  # hanging indents
 ### JavaScript
 
 * Address warnings raised by JSHint
-* Follow the [angular style guide](https://github.com/johnpapa/angular-styleguide), namely in IIF and named functions
+* Wrap each file in an IIF that invokes strict mode
+* Use named functions as often as possible
+
+_Example_:
+
+```javascript
+(function() {
+    'use strict';
+
+    function MySomething() {
+        /* stuff */
+    }
+
+    angular
+        .module('bennedetto')
+        .something('MySomething', [MySomething]);
+}());
+```
