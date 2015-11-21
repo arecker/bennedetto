@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from tracking.models import Rate
+from tracking.models import Rate, Transaction
 
 
 class RateSerializer(serializers.ModelSerializer):
@@ -18,3 +18,9 @@ class RateCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rate
         exclude = ('amount_per_day', 'user')
+
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        exclude = ()
