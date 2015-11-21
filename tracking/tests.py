@@ -11,6 +11,21 @@ def to_decimal(amount, place='0.001'):
 
 
 class RateTestCase(TestCase):
+    def test_total_nothing(self):
+        actual = Rate.objects.total()
+        self.assertEqual(actual, 0)
+
+    def test_total_something(self):
+        instance = Rate()
+        instance.description = 'Test Rate'
+        instance.amount = Decimal(10)
+        instance.days = 10
+        instance.user = User.objects.create_user('test@yahoo.com')
+        instance.save()
+
+        actual = Rate.objects.total()
+        self.assertEqual(actual, to_decimal(1))
+
     def test_calculate_amount_per_day(self):
         instance = Rate()
         instance.description = 'Test Rate'

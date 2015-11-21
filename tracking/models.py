@@ -9,7 +9,25 @@ from authenticating.models import User
 from bennedetto.utils import display_money
 
 
+class TotalByMixin(object):
+    def __init__(self):
+        if not getattr(self, 'total_by', None):
+            raise AttributeError('TotalByMixin requires a'
+                                 '"total_by" property on the model')
+
+    def total(self):
+        expr = models.Sum(self.total_by)
+        key = '{}__sum'.format(self.total_by)
+        return self.aggregate(expr)[key] or 0
+
+
+class RateQuerySet(models.QuerySet, TotalByMixin):
+    total_by = 'amount_per_day'
+
+
 class Rate(models.Model):
+    objects = RateQuerySet.as_manager()
+
     id = models.UUIDField(primary_key=True,
                           editable=False,
                           default=uuid4,
@@ -33,11 +51,9 @@ class Rate(models.Model):
                                   display_money(self.amount_per_day))
 
 
-class TransactionQuerySet(models.QuerySet):
-    def total(self):
-        expr = models.Sum('amount')
-        key = 'amount__sum'
-        return self.aggregate(expr)[key] or 0
+class TransactionQuerySet(models.QuerySet, TotalByMixin):
+    total_by = 'amount'
+
 
 class Transaction(models.Model):
     objects = TransactionQuerySet.as_manager()
