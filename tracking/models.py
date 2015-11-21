@@ -33,7 +33,15 @@ class Rate(models.Model):
                                   display_money(self.amount_per_day))
 
 
+class TransactionQuerySet(models.QuerySet):
+    def total(self):
+        expr = models.Sum('amount')
+        key = 'amount__sum'
+        return self.aggregate(expr)[key] or 0
+
 class Transaction(models.Model):
+    objects = TransactionQuerySet.as_manager()
+
     id = models.UUIDField(primary_key=True,
                           editable=False,
                           default=uuid4,
