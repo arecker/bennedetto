@@ -4,7 +4,7 @@
     <th>Amount / Day</th>
     <th>Action</th>
   </tr>
-  <tr ng-repeat="rate in ratesListCtrl.rates">
+  <tr ng-repeat="rate in ratesListCtrl.collection">
     <td>{{ rate.description }}</td>
     <td>{{ rate.amount_per_day | currency }}</td>
     <td><button class="btn btn-danger btn-sm" ng-click="ratesListCtrl.delete(rate)">Delete</button></td>

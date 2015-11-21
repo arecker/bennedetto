@@ -22,9 +22,31 @@
         return self;
     }
 
+    function buildListController(self, options) {
+        self.collection = [];
+
+        if (!options.resource) {
+            throw 'I need an "options.resource" to build a list controller, man.';
+        }
+
+        self.reloadHandle = function() {
+            options.resource.query().$promise.then(function(d) {
+                self.collection = d;
+            });
+        };
+
+        self.delete = function(res) {
+            options.resource.delete(res).$promise.then(self.reloadHandle);
+        };
+
+        self.reloadHandle();
+
+    }
+
     function FormFactory() {
         return {
-            buildFormController: buildFormController
+            buildFormController: buildFormController,
+            buildListController: buildListController
         };
     }
 

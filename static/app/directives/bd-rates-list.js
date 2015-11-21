@@ -14,24 +14,14 @@
         };
     }
 
-    function bdRatesListController(RatesResource) {
-        var self = this;
-
-        self.reloadHandle = function() {
-            RatesResource.query().$promise.then(function(d) {
-                self.rates = d;
-            });
-        };
-
-        self.delete = function(res) {
-            RatesResource.delete(res).$promise.then(self.reloadHandle);
-        };
-
-        self.reloadHandle();
+    function bdRatesListController(RatesResource, FormFactory) {
+        var self = FormFactory.buildListController(this, {
+            resource: RatesResource
+        });
     }
 
     angular
         .module('bennedetto')
-        .controller('bdRatesListController', ['RatesResource', bdRatesListController])
+        .controller('bdRatesListController', ['RatesResource', 'FormFactory', bdRatesListController])
         .directive('bdRatesList', ['StaticService', bdRatesList]);
 }());
