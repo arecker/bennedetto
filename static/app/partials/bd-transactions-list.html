@@ -1,0 +1,14 @@
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Action</th>
+  </tr>
+  <tr ng-repeat="trans in transListCtrl.collection">
+    <td>{{ trans.timestamp | date }}</td>
+    <td>{{ trans.description }}</td>
+    <td>{{ trans.amount | currency }}</td>
+    <td><button class="btn btn-danger btn-sm" ng-click="transListCtrl.delete(trans)">Delete</button></td>
+  </tr>
+</table>
