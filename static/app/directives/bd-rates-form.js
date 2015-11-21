@@ -14,23 +14,16 @@
         };
     }
 
-    function bdRatesFormController(RatesResource) {
-        var self = this;
-
-        self.model = {};
-
-        self.afterSubmit = self.afterSubmit || angular.noop;
-
-        self.submit = function() {
-            RatesResource.save(self.model).$promise.then(self.afterSubmit);
-            self.model = {};
-        };
-
+    function bdRatesFormController(RatesResource, FormFactory) {
+        var self = FormFactory.buildFormController(this, {
+            afterSubmit: this.afterSubmit,
+            resource: RatesResource
+        });
     }
 
     angular
         .module('bennedetto')
-        .controller('bdRatesFormController', ['RatesResource', bdRatesFormController])
+        .controller('bdRatesFormController', ['RatesResource', 'FormFactory', bdRatesFormController])
         .directive('bdRatesForm', ['StaticService', bdRatesForm]);
 
 }());
