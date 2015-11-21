@@ -54,6 +54,17 @@ class Rate(models.Model):
 class TransactionQuerySet(models.QuerySet, TotalByMixin):
     total_by = 'amount'
 
+    def create_from_rate_balance(self, user):
+        instance = self.model()
+        instance.description = 'Rate Total'
+        instance.amount = Rate.objects.user(user).total()
+        instance.user = user
+        return instance
+
+    def bulk_transact_rate_total(self, users):  # TODO: need a nice test case
+        return self.bulk_create([self.create_from_rate_balance(user)  # for this
+                                 for user in users])  # It's really important
+
 
 class Transaction(models.Model):
     objects = TransactionQuerySet.as_manager()
