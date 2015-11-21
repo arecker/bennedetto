@@ -13,6 +13,12 @@
                 controllerAs: 'ctrl'
             })
 
+            .when('/transactions', {
+                templateUrl: '{}app/partials/transactions.html'.format(APP_SETTINGS.staticUrl),
+                controller: 'TransactionsController',
+                controllerAs: 'ctrl'
+            })
+
             .when('/rates', {
                 templateUrl: '{}app/partials/rates.html'.format(APP_SETTINGS.staticUrl),
                 controller: 'RatesController',

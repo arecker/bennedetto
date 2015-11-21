@@ -13,6 +13,7 @@
     <div class="collapse navbar-collapse" uib-collapse="navCtrl.isCollapsed">
       <ul class="nav navbar-nav">
         <li ng-class="{'active': navCtrl.isActive('/')}"><a ng-click="navCtrl.toggleNav()" href="/#/">Today</a></li>
+        <li ng-class="{'active': navCtrl.isActive('/transactions')}"><a ng-click="navCtrl.toggleNav()" href="/#/transactions">Transactions</a></li>
         <li ng-class="{'active': navCtrl.isActive('/rates')}"><a ng-click="navCtrl.toggleNav()" href="/#/rates">Rates</a></li>
       </ul>
     </div>
