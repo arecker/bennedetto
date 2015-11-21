@@ -10,7 +10,13 @@
         }
 
         self.submit = function() {
-            options.resource(self.model).$promise.then(self.afterSubmit);
+            options.resource.save(self.model).$promise.then(self.afterSubmit);
+        };
+
+        self.reset = function(form) {
+            self.model = {};
+            form.$setPristine();
+            form.$setUntouched();
         };
 
         return self;
@@ -24,6 +30,6 @@
 
     angular
         .module('bennedetto')
-        .service('FormControllerFactory', [FormFactory]);
+        .service('FormFactory', [FormFactory]);
 
 }());

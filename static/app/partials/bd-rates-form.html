@@ -1,5 +1,5 @@
 <form name="rateForm"
-      ng-submit="ratesFormCtrl.submit() ; rateForm.$setPristine() ; rateForm.$setUntouched()"
+      ng-submit="ratesFormCtrl.submit() ; ratesFormCtrl.reset(rateForm);"
       novalidate>
   <div class="form-group">
     <label>Description</label>
