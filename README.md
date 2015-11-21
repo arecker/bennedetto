@@ -4,6 +4,16 @@ The simple, turn-based budget.
 
 [![Build Status](https://travis-ci.org/arecker/bennedetto.svg)](https://travis-ci.org/arecker/bennedetto)
 
+## About
+
+Bennedetto is a fresh, minimalist take on tracking your spending.  Use the tool to
+
+1. Simplify your regular income and outcome into a single "$X per day" figure
+2. Track your day-to-day spending with as little overhead as possible
+3. Watch your progress with instant, usable feedback.
+
+Read more about the project's inception [here](http://alexrecker.com/our-new-sid-meiers-civilization-inspired-budget/)
+
 ## Building
 
 To build the project, create a new virtual environment and activate it.
