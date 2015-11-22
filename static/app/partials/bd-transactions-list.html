@@ -1,14 +1,20 @@
-<table class="table">
-  <tr>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-    <th>Action</th>
-  </tr>
-  <tr ng-repeat="trans in transListCtrl.collection">
-    <td>{{ trans.timestamp | date }}</td>
-    <td>{{ trans.description }}</td>
-    <td>{{ trans.amount | currency }}</td>
-    <td><button class="btn btn-danger btn-sm" ng-click="transListCtrl.delete(trans)">Delete</button></td>
-  </tr>
-</table>
+<md-data-table-container>
+  <table md-data-table md-progress="deferred">
+    <thead md-order="query.order" md-trigger="onOrderChange">
+      <tr>
+        <th name="Date"></th>
+        <th name="Description"></th>
+        <th numeric name="Amount"</th>
+        <th name="Action"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr md-auto-select ng-repeat="trans in transListCtrl.collection">
+        <td>{{ trans.timestamp | date }}</td>
+        <td>{{ trans.description }}</td>
+        <td>{{ trans.amount | currency }}</td>
+        <td><md-button class="md-raised md-warn" ng-click="transListCtrl.delete(trans)">Delete</md-button></td>
+      </tr>
+    </tbody>
+  </table>
+</md-data-table-container>
