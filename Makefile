@@ -1,6 +1,8 @@
 manage = python manage.py
 install = pip install
 
+docker:
+	docker build .
 createsuperuser:
 	${manage} createsuperuser
 install-dev:

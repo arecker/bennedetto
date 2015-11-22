@@ -32,6 +32,18 @@ To start the webserver, run the familiar `python manage.py runserver` or use the
 
     $ make run
 
+### Running inside Docker
+
+To build the Docker image use
+
+    $ docker build -t bennedetto .
+
+After that you may run it thus:
+
+    $ docker run -p 8000:8000 bennedetto
+
+You can see the app now at http://localhost:8000
+
 ## Testing
 
 To run the serverside tests
