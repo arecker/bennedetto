@@ -11,7 +11,7 @@
       <tr md-auto-select ng-repeat="rate in ratesListCtrl.collection">
         <td>{{ rate.description }}</td>
         <td>{{ rate.amount_per_day | currency }}</td>
-        <td><md-button class="md-raised md-warn" ng-click="rateListCtrl.delete(rate)">Delete</md-button></td>
+        <td><md-button class="md-raised md-warn" ng-click="ratesListCtrl.delete(rate)">Delete</md-button></td>
       </tr>
     </tbody>
   </table>
