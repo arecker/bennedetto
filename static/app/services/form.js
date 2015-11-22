@@ -2,7 +2,11 @@
     'use strict';
 
     function buildFormController(self, options) {
-        self.model = {};
+        var getBlankModel = options.getBlankModel || function() {
+            return {};
+        };
+
+        self.model = getBlankModel();
         self.afterSubmit = options.afterSubmit || angular.noop;
 
         if (!options.resource) {
@@ -14,7 +18,7 @@
         };
 
         self.reset = function(form) {
-            self.model = {};
+            self.model = getBlankModel();
             form.$setPristine();
             form.$setUntouched();
         };
