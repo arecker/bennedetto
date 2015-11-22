@@ -41,6 +41,8 @@
 
         self.reloadHandle();
 
+        return self;
+
     }
 
     function FormFactory() {

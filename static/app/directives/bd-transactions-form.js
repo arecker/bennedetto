@@ -15,6 +15,7 @@
     }
 
     function bdTransactionsFormController(TransactionsResource, FormFactory) {
+
         var self = FormFactory.buildFormController(this, {
             afterSubmit: this.afterSubmit,
             resource: TransactionsResource
