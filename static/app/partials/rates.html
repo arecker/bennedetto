@@ -1,3 +1,16 @@
-<bd-rates-form after-submit="ctrl.reloadHandle"></bd-rates-form>
-<hr/>
-<bd-rates-list reload-handle="ctrl.reloadHandle"></bd-rates-list>
+<div class="row">
+  <div class="col-md-4">
+    <md-card>
+      <md-card-content>
+        <bd-rates-form after-submit="ctrl.reloadHandle"></bd-rates-form>
+      </md-card-content>
+    </md-card>
+  </div>
+  <div class="col-md-8">
+    <md-card>
+      <md-card-content>
+        <bd-rates-list reload-handle="ctrl.reloadHandle"></bd-rates-list>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>
