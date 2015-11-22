@@ -1,10 +1,9 @@
 {% extends "base.html" %}{% load staticfiles %}
-{% block ng_app %}ng-app="bennedetto"{% endblock %}
+{% block ng_app %}lagout="column" ng-app="bennedetto"{% endblock %}
 {% block content %}
-<div class="container-fluid">
-  <bd-navbar></bd-navbar>
+<bd-navbar>
   <ng-view></ng-view>
-</div>
+</bd-navbar>
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src="{% static 'app/app.js' %}"></script>
@@ -19,7 +18,6 @@
 <script type="text/javascript" src="{% static 'app/controllers/today.js' %}"></script>
 <script type="text/javascript" src="{% static 'app/controllers/transactions.js' %}"></script>
 <script type="text/javascript" src="{% static 'app/controllers/rates.js' %}"></script>
-
 {% endblock %}
 {% block scripts_inline %}
 <script type="text/javascript">

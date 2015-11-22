@@ -1,3 +1,16 @@
-<bd-transactions-form after-submit="ctrl.reloadHandle"></bd-transactions-form>
-<hr/>
-<bd-transactions-list reload-handle="ctrl.reloadHandle"></bd-transactions-list>
+<div class="row">
+  <div class="col-md-4">
+    <md-card>
+      <md-card-content>
+        <bd-transactions-form after-submit="ctrl.reloadHandle"></bd-transactions-form>
+      </md-card-content>
+    </md-card>
+    </div>
+  <div class="col-md-8">
+    <md-card>
+      <md-card-content>
+        <bd-transactions-list reload-handle="ctrl.reloadHandle"></bd-transactions-list>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

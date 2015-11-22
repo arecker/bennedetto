@@ -1,5 +1,19 @@
-body { padding-top: 70px; }     /*static navbar padding required*/
-
 .md-datepicker-calendar {
     background-color: white;
+}
+
+.md-toolbar-tools h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit;
+}
+
+md-sidenav.md-locked-open {
+  width: 150px !important;
+  min-width: 150px !important;
+  max-width: 150px !important;
+}
+
+#sidebarContainer {
+    height: 100%;
 }

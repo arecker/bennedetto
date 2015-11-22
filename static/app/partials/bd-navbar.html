@@ -1,21 +1,21 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" ng-click="navCtrl.toggleNav()">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/#/">bennedetto</a>
-      <p ng-bind="navCtrl.version" class="navbar-text navbar-left"></p>
-    </div>
-    <div class="collapse navbar-collapse" uib-collapse="navCtrl.isCollapsed">
-      <ul class="nav navbar-nav">
-        <li ng-class="{'active': navCtrl.isActive('/')}"><a ng-click="navCtrl.toggleNav()" href="/#/">Today</a></li>
-        <li ng-class="{'active': navCtrl.isActive('/transactions')}"><a ng-click="navCtrl.toggleNav()" href="/#/transactions">Transactions</a></li>
-        <li ng-class="{'active': navCtrl.isActive('/rates')}"><a ng-click="navCtrl.toggleNav()" href="/#/rates">Rates</a></li>
-      </ul>
-    </div>
+<md-toolbar layout="row">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="navCtrl.toggleSideNav('left')" hide-gt-sm class="md-icon-button">
+      <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg">
+      </md-icon>
+    </md-button>
+    <h1 class="lead">bennedetto <small ng-bind="navCtrl.version"></small></h1>
   </div>
-</nav>
+</md-toolbar>
+<div id="sidebarContainer" layout="row" flex>
+  <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+    <md-button ng-class="{'md-raised': navCtrl.isActive('/')}" ng-href="/#/">Today</md-button>
+    <md-button ng-class="{'md-raised': navCtrl.isActive('/transactions')}" ng-href="/#/transactions">Transactions</md-button>
+    <md-button ng-class="{'md-raised': navCtrl.isActive('/rates')}" ng-href="/#/rates">Rates</md-button>
+  </md-sidenav>
+  <div layout="column" flex id="content">
+    <md-content layout="column" flex class="md-padding">
+      <ng-transclude></ng-transclude>
+    </md-content>
+  </div>
+</div>

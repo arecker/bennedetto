@@ -7,11 +7,12 @@
             templateUrl: StaticService.partial('bd-navbar.html'),
             controller: 'bdNavbarController',
             controllerAs: 'navCtrl',
-            bindToController: true
+            bindToController: true,
+            transclude: true
         };
     }
 
-    function bdNavbarController($location, APP_SETTINGS) {
+    function bdNavbarController($location, $mdSidenav, APP_SETTINGS) {
         var self = this;
 
         self.version = APP_SETTINGS.version;
@@ -22,13 +23,13 @@
 
         self.isCollapsed = false;
 
-        self.toggleNav = function() {
-            self.isCollapsed = !self.isCollapsed;
+        self.toggleSideNav = function(id) {
+            $mdSidenav(id).toggle();
         };
     }
 
     angular
         .module('bennedetto')
-        .controller('bdNavbarController', ['$location', 'APP_SETTINGS', bdNavbarController])
+        .controller('bdNavbarController', ['$location', '$mdSidenav', 'APP_SETTINGS', bdNavbarController])
         .directive('bdNavbar', ['StaticService', bdNavbar]);
 }());
