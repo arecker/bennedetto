@@ -6,6 +6,9 @@
   },
   "dependencies": {
     "angular": "^1.4.7",
+    "angular-animate": "^1.4.8",
+    "angular-aria": "^1.4.8",
+    "angular-material": "^0.11.4",
     "angular-messages": "^1.5.0-beta.2",
     "angular-resource": "^1.5.0-beta.2",
     "angular-route": "^1.5.0-beta.2",
