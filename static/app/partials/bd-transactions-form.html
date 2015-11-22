@@ -28,7 +28,6 @@
     </md-input-container>
   </div>
   <div class="form-group">
-    <label>Date</label>
     <md-datepicker name="timestamp" ng-model="transFormCtrl.model.timestamp"></md-datepicker>
     <div class="text-danger" ng-messages="transForm.timestamp.$error" ng-if="transForm.timestamp.$touched && transForm.timestamp.$invalid">
       <p ng-message="required">Timestamp is required</p>

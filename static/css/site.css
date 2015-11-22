@@ -1,2 +1,5 @@
 body { padding-top: 70px; }     /*static navbar padding required*/
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; } /*angular ui bootstrap required*/
+
+.md-datepicker-calendar {
+    background-color: white;
+}

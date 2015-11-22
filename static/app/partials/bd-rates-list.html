@@ -1,12 +1,18 @@
-<table class="table">
-  <tr>
-    <th>Description</th>
-    <th>Amount / Day</th>
-    <th>Action</th>
-  </tr>
-  <tr ng-repeat="rate in ratesListCtrl.collection">
-    <td>{{ rate.description }}</td>
-    <td>{{ rate.amount_per_day | currency }}</td>
-    <td><button class="btn btn-danger btn-sm" ng-click="ratesListCtrl.delete(rate)">Delete</button></td>
-  </tr>
-</table>
+<md-data-table-container>
+  <table md-data-table md-progress="deferred">
+    <thead md-order="query.order" md-trigger="onOrderChange">
+      <tr>
+        <th name="Description"></th>
+        <th numeric name="Amount"</th>
+        <th name="Action"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr md-auto-select ng-repeat="rate in ratesListCtrl.collection">
+        <td>{{ rate.description }}</td>
+        <td>{{ rate.amount_per_day | currency }}</td>
+        <td><md-button class="md-raised md-warn" ng-click="rateListCtrl.delete(rate)">Delete</md-button></td>
+      </tr>
+    </tbody>
+  </table>
+</md-data-table-container>
