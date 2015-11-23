@@ -21,8 +21,16 @@ class TotalByMixin(object):
         return self.aggregate(expr)[key] or 0
 
 
-class RateQuerySet(models.QuerySet, TotalByMixin):
+class UserMixin(object):
+    def user(self, user):
+        return self.filter(user=user)
+
+
+class RateQuerySet(models.QuerySet, TotalByMixin, UserMixin):
     total_by = 'amount_per_day'
+
+    def user(self, user):
+        return self.filter(user=user)
 
 
 class Rate(models.Model):
@@ -51,7 +59,7 @@ class Rate(models.Model):
                                   display_money(self.amount_per_day))
 
 
-class TransactionQuerySet(models.QuerySet, TotalByMixin):
+class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
     total_by = 'amount'
 
     def create_from_rate_balance(self, user):
@@ -61,9 +69,9 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin):
         instance.user = user
         return instance
 
-    def bulk_transact_rate_total(self, users):  # TODO: need a nice test case
-        return self.bulk_create([self.create_from_rate_balance(user)  # for this
-                                 for user in users])  # It's really important
+    def bulk_transact_rate_total(self, users):
+        return self.bulk_create([self.create_from_rate_balance(user)
+                                 for user in users])
 
 
 class Transaction(models.Model):
