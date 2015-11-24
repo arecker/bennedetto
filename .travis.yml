@@ -1,6 +1,11 @@
 language: python
 python: "2.7"
-install: make dev-bootstrap-headless
-script: make test
+install:
+  - pip install tox
+  - npm install -g grunt-cli
+  - npm install
+script:
+  - grunt
+  - tox
 notifications:
   email: false
