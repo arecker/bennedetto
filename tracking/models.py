@@ -10,10 +10,11 @@ from bennedetto.utils import display_money
 
 
 class TotalByMixin(object):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         if not getattr(self, 'total_by', None):
             raise AttributeError('TotalByMixin requires a'
                                  '"total_by" property on the model')
+        super(TotalByMixin, self).__init__()
 
     def total(self):
         expr = models.Sum(self.total_by)

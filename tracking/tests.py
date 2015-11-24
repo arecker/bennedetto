@@ -4,7 +4,7 @@ from collections import namedtuple
 from django.test import TestCase
 
 from authenticating.models import User
-from tracking.models import Rate, Transaction
+from tracking.models import Rate, Transaction, TotalByMixin
 
 
 def to_decimal(amount, place='0.001'):
@@ -88,6 +88,16 @@ class TransactionTestCase(TestCase):
 
         actual = Transaction.objects.total()
         self.assertEqual(actual, to_decimal(5))
+
+
+class TotalByMixinTestCase(TestCase):
+    def test_order_by_validate(self):
+        class MockImplementor(TotalByMixin):
+            pass
+
+        with self.assertRaisesRegexp(AttributeError,
+                                     'TotalByMixin requires a'):
+            MockImplementor()
 
 
 class TransactRateBalanceTestCase(TestCase):
