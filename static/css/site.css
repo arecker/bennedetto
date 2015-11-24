@@ -17,3 +17,7 @@ md-sidenav.md-locked-open {
 #sidebarContainer {
     height: 100%;
 }
+
+bd-navbar md-toolbar .md-toolbar-tools {
+    background-color: #008080;
+}
