@@ -23,15 +23,14 @@ class TotalByMixin(object):
 
 
 class UserMixin(object):
+    user_by = 'user'
+
     def user(self, user):
-        return self.filter(user=user)
+        return self.filter((self.user_by, user))
 
 
 class RateQuerySet(models.QuerySet, TotalByMixin, UserMixin):
     total_by = 'amount_per_day'
-
-    def user(self, user):
-        return self.filter(user=user)
 
 
 class Rate(models.Model):

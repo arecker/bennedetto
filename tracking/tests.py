@@ -4,7 +4,10 @@ from collections import namedtuple
 from django.test import TestCase
 
 from authenticating.models import User
-from tracking.models import Rate, Transaction, TotalByMixin
+from tracking.models import (Rate,
+                             Transaction,
+                             TotalByMixin,
+                             UserMixin)
 
 
 def to_decimal(amount, place='0.001'):
@@ -99,6 +102,28 @@ class TotalByMixinTestCase(TestCase):
                                      'TotalByMixin requires a'):
             MockImplementor()
 
+
+class UserMixinTestCase(TestCase):
+    def test_default(self):
+
+        class MockImplementor(UserMixin):
+            def filter(self, *args, **kwargs):
+                return args
+
+        actual = MockImplementor().user('test')
+        expected = (('user', 'test'),)
+        self.assertEqual(actual, expected)
+
+    def test_overrideable(self):
+
+        class MockImplementor(UserMixin):
+            user_by = 'this_user'
+            def filter(self, *args, **kwargs):
+                return args
+
+        actual = MockImplementor().user('test')
+        expected = (('this_user', 'test'),)
+        self.assertEqual(actual, expected)
 
 class TransactRateBalanceTestCase(TestCase):
     def _create_user(self, name):
