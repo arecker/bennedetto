@@ -1,5 +1,7 @@
 # bennedetto
 
+[![Join the chat at https://gitter.im/arecker/bennedetto](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/arecker/bennedetto?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 The simple, turn-based budget.
 
 [![Build Status](https://travis-ci.org/arecker/bennedetto.svg)](https://travis-ci.org/arecker/bennedetto)
