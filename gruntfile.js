@@ -53,11 +53,38 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+        jasmine: {
+            pivotal: {
+                src: [
+                    'static/app/**/*.js',
+                    'jasmine/mocks.js',
+                ],
+                options: {
+                    specs: 'jasmine/**/*.js',
+                    vendor: [
+                        'static/vendor-debug.js',
+                        'node_modules/angular-mocks/angular-mocks.js'
+                    ],
+                    polyfills: 'static/js/polyfills.js',
+                    keepRunner: true
+                }
+            }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 8888,
+                    keepalive: true
+                }
+            }
         }
     });
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.registerTask('default', ['browserify', 'cssmin', 'jshint']);
-    grunt.registerTask('test', ['jshint']);
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.registerTask('default', ['browserify', 'cssmin', 'jshint', 'jasmine']);
+    grunt.registerTask('test', ['jshint', 'jasmine']);
 };

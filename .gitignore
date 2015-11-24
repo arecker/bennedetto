@@ -6,3 +6,5 @@ static/vendor.js
 static/vendor-debug.js
 *.pyc
 .tox
+.grunt
+_SpecRunner.html
