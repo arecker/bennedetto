@@ -117,7 +117,7 @@ class TransactRateBalanceTestCase(TestCase):
         for name in users:
             self._create_user(name)
 
-        for name, rates in rates.iteritems():
+        for name, rates in rates.items():
             self._associate_rates(name, rates)
 
     def test_it(self):
