@@ -1,6 +1,3 @@
-<md-data-table-toolbar>
-  <h2 class="md-title">Transactions</h2>
-</md-data-table-toolbar>
 <md-data-table-container>
   <table md-data-table md-progress="deferred">
     <thead md-order="query.order" md-trigger="onOrderChange">
@@ -16,7 +13,25 @@
         <td>{{ trans.timestamp | date }}</td>
         <td>{{ trans.description }}</td>
         <td>{{ trans.amount | currency }}</td>
-        <td><md-button class="md-raised md-warn" ng-click="transListCtrl.delete(trans)">Delete</md-button></td>
+        <td>
+          <md-menu>
+            <md-button ng-click="$mdOpenMenu($event)">
+              <i class="fa fa-bars"></i>
+            </md-button>
+            <md-menu-content width="2">
+              <md-menu-item>
+                <md-button>
+                  <i class="fa fa-pencil"></i><span> Edit</span>
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="transListCtrl.delete(trans)">
+                  <i class="fa fa-trash"></i><span> Delete</span>
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </td>
       </tr>
     </tbody>
   </table>
