@@ -6,7 +6,6 @@ WORKDIR /usr/src/app
 RUN apt-get update && apt-get install -y \
     bzip2 \
     fontconfig \
-    git \
     libfreetype6-dev \
     nodejs npm \
   --no-install-recommends && rm -rf /var/lib/apt/lists/*
