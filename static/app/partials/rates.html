@@ -1,16 +1,16 @@
-<div class="row">
-  <div class="col-md-4">
-    <md-card>
-      <md-card-content>
-        <bd-rates-form after-submit="ctrl.reloadHandle"></bd-rates-form>
-      </md-card-content>
-    </md-card>
-  </div>
-  <div class="col-md-8">
-    <md-card>
-      <md-card-content>
-        <bd-rates-list reload-handle="ctrl.reloadHandle"></bd-rates-list>
-      </md-card-content>
-    </md-card>
-  </div>
-</div>
+<section layout="row" flex>
+  <md-content flex layout-padding>
+    <h2 class="md-toolbar-tools">
+      <span>Rates</span>
+      <span>
+        <md-button class="md-button md-raised pull-right" ng-click="ctrl.toggleRight()">
+          + Add
+        </md-button>
+      </span>
+    </h2>
+    <bd-rates-list reload-handle="ctrl.reloadHandle"></bd-rates-list>
+  </md-content>
+  <bd-sliding-sidebar>
+    <bd-rates-form after-submit="ctrl.afterSubmit"></bd-rates-form>
+  </bd-sliding-sidebar>
+</section>

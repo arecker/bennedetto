@@ -14,7 +14,25 @@
       <tr md-auto-select ng-repeat="rate in ratesListCtrl.collection">
         <td>{{ rate.description }}</td>
         <td>{{ rate.amount_per_day | currency }}</td>
-        <td><md-button class="md-warn md-raised" ng-click="ratesListCtrl.delete(rate)">Delete</md-button></td>
+        <td>
+          <md-menu>
+            <md-button aria-label="Action" ng-click="$mdOpenMenu($event)">
+              <i class="fa fa-bars"></i>
+            </md-button>
+            <md-menu-content width="2">
+              <md-menu-item>
+                <md-button>
+                  <i class="fa fa-pencil"></i><span> Edit</span>
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="ratesListCtrl.delete(rate)">
+                  <i class="fa fa-trash"></i><span> Delete</span>
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </td>
       </tr>
     </tbody>
   </table>

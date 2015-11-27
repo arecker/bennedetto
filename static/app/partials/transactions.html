@@ -10,12 +10,7 @@
     </h2>
     <bd-transactions-list reload-handle="ctrl.reloadHandle"></bd-transactions-list>
   </md-content>
-  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-    <md-toolbar class="md-theme-light">
-      <h1 class="md-toolbar-tools">Add Transaction</h1>
-    </md-toolbar>
-    <md-content layout-padding>
-      <bd-transactions-form after-submit="ctrl.afterSubmit"></bd-transactions-form>
-    </md-content>
-  </md-sidenav>
+  <bd-sliding-sidebar>
+    <bd-transactions-form after-submit="ctrl.afterSubmit"></bd-transactions-form>
+  </bd-sliding-sidebar>
 </section>
