@@ -4,6 +4,11 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from timezone_field import TimeZoneField
 from django.utils import timezone
+import pytz
+
+
+def get_default_timezone():
+    return pytz.timezone('US/Central')
 
 
 class UserManager(BaseUserManager):
@@ -30,7 +35,7 @@ class User(AbstractBaseUser):
                           default=uuid4)
 
     email = models.EmailField(unique=True)
-    timezone = TimeZoneField(default='America/Chicago')
+    timezone = TimeZoneField(default=get_default_timezone)
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'

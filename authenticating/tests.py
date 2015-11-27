@@ -3,6 +3,7 @@ from django.test import TestCase
 from authenticating.forms import UserCreationForm
 from authenticating.models import User
 
+
 class SimpleTestCase(TestCase):
     def test_forms_user_creation_form_valid(self):
         form = UserCreationForm({
@@ -10,6 +11,7 @@ class SimpleTestCase(TestCase):
             'email': 'test@example.org',
             'password1': 'test42',
             'password2': 'test42',
+            'timezone': 'US/Central',
         })
         self.assertTrue(form.is_valid())
 
@@ -19,6 +21,7 @@ class SimpleTestCase(TestCase):
             'email': 'test@example.org',
             'password1': 'test42',
             'password2': 'test24',
+            'timezone': 'US/Central',
         })
         self.assertFalse(form.is_valid())
 
