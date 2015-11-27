@@ -14,7 +14,17 @@
         }
 
         self.submit = function() {
-            options.resource.save(self.model).$promise.then(self.afterSubmit);
+            var promise;
+            if (self.model.id) {
+                promise = options.resource.update(self.model).$promise;
+            } else {
+                promise = options.resource.save(self.model).$promise;
+            }
+            promise.then(self.afterSubmit);
+        };
+
+        self.edit = function(res) {
+            self.model = angular.copy(res);
         };
 
         self.reset = function(form) {

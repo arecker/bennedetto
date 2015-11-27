@@ -9,7 +9,8 @@
             controllerAs: 'transListCtrl',
             bindToController: true,
             scope: {
-                reloadHandle: '=?'
+                reloadHandle: '=?',
+                edit: '='
             }
         };
     }

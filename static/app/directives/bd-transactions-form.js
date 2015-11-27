@@ -9,7 +9,8 @@
             controllerAs: 'transFormCtrl',
             bindToController: true,
             scope: {
-                afterSubmit: '=?'
+                afterSubmit: '=?',
+                edit: '='
             }
         };
     }
@@ -25,6 +26,16 @@
                 };
             }
         });
+
+        self.edit = function(res) {
+            self.model = {
+                id: res.id,
+                description: res.description,
+                amount: Number(res.amount), // yuck...
+                timestamp: res.timestamp,
+                user: res.user
+            };
+        };
     }
 
     angular

@@ -4,7 +4,17 @@
     function ResourceFactory($resource, APP_SETTINGS) {
         return {
             buildResource: function(endpoint) {
-                return $resource('{}{}/:id'.format(APP_SETTINGS.apiUrl, endpoint));
+                var url = '{}{}/:id'.format(APP_SETTINGS.apiUrl, endpoint),
+                    params = {
+                        id: '@id'
+                    },
+                    customObjs = {
+                        update: {
+                            method: 'PUT'
+                        }
+                    };
+
+                return $resource(url, params,  customObjs);
             }
         };
     }

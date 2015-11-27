@@ -8,9 +8,9 @@
         </md-button>
       </span>
     </h2>
-    <bd-transactions-list reload-handle="ctrl.reloadHandle"></bd-transactions-list>
+    <bd-transactions-list reload-handle="ctrl.reloadHandle" edit="ctrl.edit"></bd-transactions-list>
   </md-content>
   <bd-sliding-sidebar>
-    <bd-transactions-form after-submit="ctrl.afterSubmit"></bd-transactions-form>
+    <bd-transactions-form after-submit="ctrl.afterSubmit" edit="ctrl.sendToEdit"></bd-transactions-form>
   </bd-sliding-sidebar>
 </section>
