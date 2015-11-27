@@ -1,3 +1,4 @@
 django-compressor==1.5
 django-flat-theme==1.1.1
 djangorestframework==3.3.1
+django-timezone-field==1.3

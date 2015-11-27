@@ -2,6 +2,7 @@ from uuid import uuid4
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from timezone_field import TimeZoneField
 
 
 class UserManager(BaseUserManager):
@@ -28,6 +29,7 @@ class User(AbstractBaseUser):
                           default=uuid4)
 
     email = models.EmailField(unique=True)
+    timezone = TimeZoneField(default='America/Chicago')
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'

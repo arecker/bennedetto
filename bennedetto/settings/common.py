@@ -18,6 +18,7 @@ INSTALLED_APPS = (
     # 3rd party apps
     'compressor',
     'rest_framework',
+    'timezone_field',
 
     # Project apps
     'authenticating',
