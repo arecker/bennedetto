@@ -8,10 +8,6 @@
             $mdSidenav('right').toggle();
         };
 
-        self.isOpenRight = function() {
-            return $mdSidenav('right').isOpen();
-        };
-
         self.afterSubmit = function() {
             self.toggleRight();
             self.reloadHandle();
