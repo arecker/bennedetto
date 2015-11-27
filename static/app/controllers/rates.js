@@ -12,6 +12,11 @@
             self.toggleRight();
             self.reloadHandle();
         };
+
+        self.edit = function(res) {
+            self.toggleRight();
+            self.sendToEdit(res);
+        };
     }
 
     angular

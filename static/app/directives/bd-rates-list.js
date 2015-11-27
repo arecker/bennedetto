@@ -9,7 +9,8 @@
             controllerAs: 'ratesListCtrl',
             bindToController: true,
             scope: {
-                reloadHandle: '=?'
+                reloadHandle: '=?',
+                edit: '='
             }
         };
     }

@@ -9,7 +9,8 @@
             controllerAs: 'ratesFormCtrl',
             bindToController: true,
             scope: {
-                afterSubmit: '=?'
+                afterSubmit: '=?',
+                edit: '='
             }
         };
     }
@@ -19,6 +20,16 @@
             afterSubmit: this.afterSubmit,
             resource: RatesResource
         });
+
+        self.edit = function(res) {
+            self.model = {
+                id: res.id,
+                description: res.description,
+                amount: Number(res.amount),
+                timestamp: res.timestamp,
+                user: res.user
+            };
+        };
     }
 
     angular
