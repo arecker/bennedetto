@@ -3,6 +3,7 @@ from uuid import uuid4
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from timezone_field import TimeZoneField
+from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
@@ -46,3 +47,6 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, *args):
         return self.is_staff
+
+    def activate_timezone(self):
+        timezone.activate(self.timezone)
