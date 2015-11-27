@@ -1,6 +1,13 @@
 from rest_framework import serializers
+from django.utils import timezone
 
 from tracking.models import Rate, Transaction
+
+
+class TimeZoneDateTimeField(serializers.DateTimeField):
+    def to_native(self, value):
+        value = timezone.localtime(value)
+        return super(TimeZoneDateTimeField, self).to_native(value)
 
 
 def assign_user(func):
@@ -28,12 +35,16 @@ class RateCreateSerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
+    timestamp = TimeZoneDateTimeField()
+
     class Meta:
         model = Transaction
         exclude = ()
 
 
 class TransactionCreateSerializer(serializers.ModelSerializer):
+    timestamp = TimeZoneDateTimeField()
+
     @assign_user
     def create(self, *args, **kwargs):
         return super(TransactionCreateSerializer, self).create(*args, **kwargs)
