@@ -62,6 +62,11 @@ class Rate(models.Model):
 class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
     total_by = 'amount'
 
+    def date(self, date):
+        return self.filter(timestamp__month=date.month,
+                           timestamp__day=date.day,
+                           timestamp__year=date.year)
+
     def create_from_rate_balance(self, user):
         instance = self.model()
         instance.description = 'Rate Total'
