@@ -22,7 +22,8 @@ INSTALLED_APPS = (
 
     # Project apps
     'authenticating',
-    'tracking'
+    'tracking',
+    'reporting'
 )
 
 MIDDLEWARE_CLASSES = (
