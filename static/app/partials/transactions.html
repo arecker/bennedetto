@@ -1,14 +1,14 @@
 <section layout="row" flex>
   <md-content flex layout-padding>
-    <h2 class="md-toolbar-tools">
-      <span>Transactions</span>
-      <span>
-        <md-button class="md-button md-raised pull-right" ng-click="ctrl.toggleRight()">
-          + Add
-        </md-button>
-      </span>
-    </h2>
-    <bd-transactions-list reload-handle="ctrl.reloadHandle" edit="ctrl.edit"></bd-transactions-list>
+    <div class="page-header">
+      <h2 class="lead">Transactions</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-success" ng-click="ctrl.toggleRight()"><i class="fa fa-plus"></i> Add</button>
+        <bd-transactions-list reload-handle="ctrl.reloadHandle" edit="ctrl.edit"></bd-transactions-list>
+      </div>
+    </div>
   </md-content>
   <bd-sliding-sidebar>
     <bd-transactions-form after-submit="ctrl.afterSubmit" edit="ctrl.sendToEdit"></bd-transactions-form>
