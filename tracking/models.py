@@ -6,7 +6,6 @@ from django.core.validators import MinValueValidator
 from django.utils import timezone
 
 from authenticating.models import User
-from bennedetto.utils import display_money
 
 
 class TotalByMixin(object):
@@ -56,7 +55,7 @@ class Rate(models.Model):
 
     def __unicode__(self):
         return '{0} ({1})'.format(self.description,
-                                  display_money(self.amount_per_day))
+                                  self.amount_per_day)
 
 
 class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
@@ -94,4 +93,4 @@ class Transaction(models.Model):
 
     def __unicode__(self):
         return '{0} ({1})'.format(self.description,
-                                  display_money(self.amount))
+                                  self.amount)
