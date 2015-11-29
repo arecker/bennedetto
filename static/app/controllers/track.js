@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function TrackController($scope, $mdSidenav, TransactionsResource, RatesResource, SummaryReport) {
+    function TrackController($scope, $mdSidenav, TransactionsResource, RatesResource) {
         var self = this,
 
             getEmptyTransaction = function() {
@@ -29,12 +29,6 @@
             });
         };
 
-        self.reloadSummary = function() {
-            SummaryReport.get().then(function(res) {
-                self.summary = res.data;
-            });
-        };
-
         self.toggleTransactionForm = function() {
             $mdSidenav('transaction').toggle();
         };
@@ -55,6 +49,7 @@
             promise.then(function() {
                 self.toggleTransactionForm();
                 self.reloadTransactions();
+                self.summaryTable.reload();
             });
         };
 
@@ -86,7 +81,10 @@
         };
 
         self.deleteTransaction = function(res) {
-            TransactionsResource.delete(res).$promise.then(self.reloadTransactions);
+            TransactionsResource.delete(res).$promise.then(function(){
+                self.reloadTransactions();
+                self.summaryTable.reload();
+            });
         };
 
         self.deleteRate = function(res) {
@@ -122,7 +120,6 @@
 
         self.reloadTransactions();
         self.reloadRates();
-        self.reloadSummary();
 
         $scope.$watch(function() {
             return angular.toJson([self.toDate, self.fromDate]);
