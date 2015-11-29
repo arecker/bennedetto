@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function TrackController($scope, $mdSidenav, TransactionsResource, RatesResource) {
+    function TrackController($scope, $mdSidenav, TransactionsResource, RatesResource, SummaryReport) {
         var self = this,
 
             getEmptyTransaction = function() {
@@ -26,6 +26,12 @@
         self.reloadRates = function() {
             RatesResource.query().$promise.then(function(data) {
                 self.rates = data;
+            });
+        };
+
+        self.reloadSummary = function() {
+            SummaryReport.get().then(function(res) {
+                self.summary = res.data;
             });
         };
 
@@ -116,6 +122,7 @@
 
         self.reloadTransactions();
         self.reloadRates();
+        self.reloadSummary();
 
         $scope.$watch(function() {
             return angular.toJson([self.toDate, self.fromDate]);
@@ -131,5 +138,5 @@
 
     angular
         .module('bennedetto')
-        .controller('TrackController', ['$scope', '$mdSidenav', 'TransactionsResource', 'RatesResource', TrackController]);
+        .controller('TrackController', ['$scope', '$mdSidenav', 'TransactionsResource', 'RatesResource', 'SummaryReport', TrackController]);
 }());

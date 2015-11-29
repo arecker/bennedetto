@@ -3,6 +3,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import list_route
 from django.core.urlresolvers import reverse
 
+from tracking.models import Transaction
+
+
+transactions = Transaction.objects
+
 
 class ReportViewSet(ViewSet):
     def _to_absolute_url(self, name):
@@ -14,4 +19,4 @@ class ReportViewSet(ViewSet):
 
     @list_route(methods=['get'], url_path='summary')
     def summary(self, request):
-        return Response('summary report')
+        return Response({'today': transactions.today().total()})

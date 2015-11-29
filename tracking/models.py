@@ -67,6 +67,9 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
                            timestamp__day=date.day,
                            timestamp__year=date.year)
 
+    def today(self):
+        return self.date(timezone.now())
+
     def date_range(self, start, end):
         qs = self
         zone = timezone.get_current_timezone()

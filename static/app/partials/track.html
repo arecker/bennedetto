@@ -56,6 +56,24 @@
         <h2 class="lead">Summary</h2>
       </div>
       <table class="table">
+        <tbody>
+          <tr>
+            <td><strong>Today</strong></td>
+            <td ng-bind="ctrl.summary.today | currency"></td>
+          </tr>
+          <tr>
+            <td><strong>This Week</strong></td>
+            <td>$0.00</td>
+          </tr>
+          <tr>
+            <td><strong>This Month</strong></td>
+            <td>$0.00</td>
+          </tr>
+          <tr>
+            <td><strong>This Year</strong></td>
+            <td>$0.00</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>

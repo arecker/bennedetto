@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function ResourceFactory($resource, APP_SETTINGS) {
+    function ResourceFactory($resource, $http, APP_SETTINGS) {
         return {
             buildResource: function(endpoint) {
                 var url = '{}{}/:id'.format(APP_SETTINGS.apiUrl, endpoint),
@@ -15,6 +15,13 @@
                     };
 
                 return $resource(url, params,  customObjs);
+            },
+            buildReportResource: function(name) {
+                return {
+                    get: function() {
+                        return $http.get('{}reports/{}'.format(APP_SETTINGS.apiUrl, name));
+                    }
+                };
             }
         };
     }
@@ -27,9 +34,14 @@
         return ResourceFactory.buildResource('transactions');
     }
 
+    function SummaryReport(ResourceFactory) {
+        return ResourceFactory.buildReportResource('summary');
+    }
+
     angular
         .module('bennedetto')
-        .factory('ResourceFactory', ['$resource', 'APP_SETTINGS', ResourceFactory])
+        .factory('ResourceFactory', ['$resource', '$http', 'APP_SETTINGS', ResourceFactory])
         .service('RatesResource', ['ResourceFactory', RatesResource])
-        .service('TransactionsResource', ['ResourceFactory', TransactionsResource]);
+        .service('TransactionsResource', ['ResourceFactory', TransactionsResource])
+        .service('SummaryReport', ['ResourceFactory', SummaryReport]);;
 }());
