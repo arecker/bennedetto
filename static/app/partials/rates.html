@@ -1,16 +1,16 @@
-<section layout="row" flex>
-  <md-content flex layout-padding>
-    <div class="page-header">
-      <h2 class="lead">Rates</h1>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <button class="btn btn-success" ng-click="ctrl.toggleRight()"><i class="fa fa-plus"></i> Add</button>
-        <bd-rates-list reload-handle="ctrl.reloadHandle" edit="ctrl.edit"></bd-rates-list>
+<div class="container-fluid">
+  <div class="page-header">
+    <h2 class="lead">Rates</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-success" ng-click="ctrl.toggleRight()"><i class="fa fa-plus"></i> Add</button>
       </div>
+      <bd-rates-list reload-handle="ctrl.reloadHandle" edit="ctrl.edit"></bd-rates-list>
     </div>
-  </md-content>
+  </div>
   <bd-sliding-sidebar>
     <bd-rates-form after-submit="ctrl.afterSubmit" edit="ctrl.sendToEdit"></bd-rates-form>
   </bd-sliding-sidebar>
-</section>
+</div>

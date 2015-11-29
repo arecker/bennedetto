@@ -1,36 +1,34 @@
-<md-data-table-container>
-  <table md-data-table md-progress="deferred">
-    <thead md-order="query.order" md-trigger="onOrderChange">
-      <tr>
-        <th name="Description"></th>
-        <th numeric name="Amount"</th>
-        <th name="Action"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr md-auto-select ng-repeat="rate in ratesListCtrl.collection">
-        <td>{{ rate.description }}</td>
-        <td>{{ rate.amount_per_day | currency }}</td>
-        <td>
-          <md-menu>
-            <md-button aria-label="Action" ng-click="$mdOpenMenu($event)">
-              <i class="fa fa-bars"></i>
-            </md-button>
-            <md-menu-content width="2">
-              <md-menu-item>
-                <md-button ng-click="ratesListCtrl.edit(rate)">
-                  <i class="fa fa-pencil"></i><span> Edit</span>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-click="ratesListCtrl.delete(rate)">
-                  <i class="fa fa-trash"></i><span> Delete</span>
-                </md-button>
-              </md-menu-item>
-            </md-menu-content>
-          </md-menu>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</md-data-table-container>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="rate in ratesListCtrl.collection">
+      <td ng-bind="rate.description"></td>
+      <td ng-bind="rate.amount_per_day | currency"></td>
+      <td>
+        <md-menu>
+          <button type="button" class="btn btn-default" ng-click="$mdOpenMenu($event)">
+            <i class="fa fa-bars"></i>
+          </button>
+          <md-menu-content width="2">
+            <md-menu-item>
+              <md-button ng-click="ratesListCtrl.edit(rate)">
+                <i class="fa fa-pencil"></i><span> Edit</span>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="ratesListCtrl.delete(rate)">
+                <i class="fa fa-trash"></i><span> Delete</span>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,38 +1,34 @@
-<md-data-table-container>
-  <table md-data-table md-progress="deferred">
-    <thead md-order="query.order" md-trigger="onOrderChange">
-      <tr>
-        <th name="Date"></th>
-        <th name="Description"></th>
-        <th numeric name="Amount"</th>
-        <th name="Action"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr md-auto-select ng-repeat="trans in transListCtrl.collection">
-        <td>{{ trans.timestamp | date }}</td>
-        <td>{{ trans.description }}</td>
-        <td>{{ trans.amount | currency }}</td>
-        <td>
-          <md-menu>
-            <md-button aria-label="Action" ng-click="$mdOpenMenu($event)">
-              <i class="fa fa-bars"></i>
-            </md-button>
-            <md-menu-content width="2">
-              <md-menu-item>
-                <md-button ng-click="transListCtrl.edit(trans)">
-                  <i class="fa fa-pencil"></i><span> Edit</span>
-                </md-button>
-              </md-menu-item>
-              <md-menu-item>
-                <md-button ng-click="transListCtrl.delete(trans)">
-                  <i class="fa fa-trash"></i><span> Delete</span>
-                </md-button>
-              </md-menu-item>
-            </md-menu-content>
-          </md-menu>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</md-data-table-container>
+<table class="table">
+  <thead>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="trans in transListCtrl.collection">
+      <td ng-bind="trans.timestamp | date"></td>
+      <td ng-bind="trans.description"></td>
+      <td ng-bind="trans.amount | currency"></td>
+      <td>
+        <md-menu>
+          <button type="button" class="btn btn-default" ng-click="$mdOpenMenu($event)">
+            <i class="fa fa-bars"></i>
+          </button>
+          <md-menu-content width="2">
+            <md-menu-item>
+              <md-button ng-click="transListCtrl.edit(trans)">
+                <i class="fa fa-pencil"></i><span> Edit</span>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="transListCtrl.delete(trans)">
+                <i class="fa fa-trash"></i><span> Delete</span>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </td>
+    </tr>
+  </tbody>
+</table>

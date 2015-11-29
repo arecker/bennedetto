@@ -1,16 +1,16 @@
-<section layout="row" flex>
-  <md-content flex layout-padding>
-    <div class="page-header">
-      <h2 class="lead">Transactions</h2>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <button class="btn btn-success" ng-click="ctrl.toggleRight()"><i class="fa fa-plus"></i> Add</button>
-        <bd-transactions-list reload-handle="ctrl.reloadHandle" edit="ctrl.edit"></bd-transactions-list>
+<div class="container-fluid">
+  <div class="page-header">
+    <h2 class="lead">Transactions</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-success" ng-click="ctrl.toggleRight()"><i class="fa fa-plus"></i> Add</button>
       </div>
+      <bd-transactions-list reload-handle="ctrl.reloadHandle" edit="ctrl.edit"></bd-transactions-list>
     </div>
-  </md-content>
+  </div>
   <bd-sliding-sidebar>
     <bd-transactions-form after-submit="ctrl.afterSubmit" edit="ctrl.sendToEdit"></bd-transactions-form>
   </bd-sliding-sidebar>
-</section>
+</div>
