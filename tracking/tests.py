@@ -1,7 +1,9 @@
 from decimal import Decimal
 from collections import namedtuple
+import datetime
 
 from django.test import TestCase
+from django.utils import timezone
 
 from authenticating.models import User
 from tracking.models import (Rate,
@@ -91,6 +93,23 @@ class TransactionTestCase(TestCase):
 
         actual = Transaction.objects.total()
         self.assertEqual(actual, to_decimal(5))
+
+    def test_date_filter(self):
+        mock = Transaction()
+        mock.amount = Decimal(10)
+        mock.description = 'Date Test'
+        mock.user = User.objects.create_user('hello@test.com')
+        mock.timestamp = datetime.datetime(2014, 1, 1, 8, 15, 2, 0, timezone.get_current_timezone())
+        mock.save()
+
+        filter_date = datetime.datetime.combine(datetime.datetime(2014, 1, 1),
+                                                datetime.time.max)
+        actual = Transaction.objects.date(filter_date).first()
+        self.assertEqual(actual.description, 'Date Test')
+
+        filter_date = datetime.datetime(2014, 1, 2, 8, 15, 2, 0, timezone.get_current_timezone())
+        actual = Transaction.objects.date(filter_date).exists()
+        self.assertFalse(actual)
 
 
 class TotalByMixinTestCase(TestCase):
