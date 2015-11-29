@@ -11,7 +11,10 @@ module.exports = function(grunt) {
                         'node_modules/angular-aria/angular-aria.min.js',
                         'node_modules/angular-animate/angular-animate.min.js',
                         'node_modules/angular-material/angular-material.min.js',
-                        'node_modules/angular-material-data-table/dist/md-data-table.min.js'
+                        'node_modules/angular-material-data-table/dist/md-data-table.min.js',
+                        'node_modules/chart.js/Chart.min.js',
+                        'node_modules/angular-chart.js/dist/angular-chart.min.js',
+                        'static/js/globals.js'
                     ],
                     'static/vendor-debug.js': [
                         'node_modules/angular/angular.js',
@@ -21,7 +24,10 @@ module.exports = function(grunt) {
                         'node_modules/angular-aria/angular-aria.js',
                         'node_modules/angular-animate/angular-animate.js',
                         'node_modules/angular-material/angular-material.js',
-                        'node_modules/angular-material-data-table/dist/md-data-table.js'
+                        'node_modules/angular-material-data-table/dist/md-data-table.js',
+                        'node_modules/chart.js/Chart.js',
+                        'node_modules/angular-chart.js/dist/angular-chart.js',
+                        'static/js/globals.js'
                     ]
                 }
             }
@@ -32,7 +38,6 @@ module.exports = function(grunt) {
                 curly: true,
                 eqeqeq: true,
                 eqnull: true,
-                camelcase: true,
                 forin: true,
                 funcscope: true,
                 latedef: true,
@@ -50,7 +55,8 @@ module.exports = function(grunt) {
                         'node_modules/angular-material/angular-material.min.css',
                         'node_modules/angular-material/angular-material.layout.min.css',
                         'node_modules/angular-material-data-table/dist/md-data-table.min.css',
-                        'node_modules/font-awesome/css/font-awesome.min.css'
+                        'node_modules/font-awesome/css/font-awesome.min.css',
+                        'node_modules/angular-chart.js/dist/angular-chart.min.css'
                     ]
                 }
             }

@@ -23,7 +23,7 @@
     }
 
     angular
-        .module('bennedetto', ['ngRoute', 'ngResource', 'ngMessages', 'ngMaterial'])
+        .module('bennedetto', ['ngRoute', 'ngResource', 'ngMessages', 'ngMaterial', 'chart.js'])
         .config(['$routeProvider', '$resourceProvider', '$httpProvider', 'APP_SETTINGS', config]);
 
 }());
