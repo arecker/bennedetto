@@ -9,10 +9,9 @@
 </md-toolbar>
 <div id="sidebarContainer" layout="row" flex>
   <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-4dp" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
-    <ul class="nav nav-pills nav-stacked text-right">
-      <li role="presentation"><a ng-href="/#/">Today</a></li>
-      <li role="presentation"><a ng-href="/#/transactions">Transactions</a></li>
-      <li role="presentation"><a href="/#/rates">Rates</a></li>
+    <ul class="nav nav-pills nav-stacked text-center">
+      <li role="presentation" ng-class="{'active': navCtrl.isActive('/track')}"><a href="/#/track">Track</a></li>
+      <li role="presentation" ng-class="{'active': navCtrl.isActive('/explore')}"><a href="/#/explore">Explore</a></li>
     </ul>
   </md-sidenav>
   <div layout="column" flex id="content">

@@ -1,0 +1,199 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="page-header">
+        <h2 class="lead pull-left">Transactions</h2>
+        <div class="pull-right">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-success" ng-click="ctrl.toggleTransactionForm()"><i class="fa fa-plus"></i> Add</button>
+            <button type="button" class="btn btn-default" ng-click="ctrl.filterIsOpen = !ctrl.filterIsOpen"><i class="fa fa-filter"></i> Filter</button>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="panel" ng-show="ctrl.filterIsOpen">
+        <md-datepicker md-placeholder="From" ng-model="ctrl.fromDate"></md-datepicker>
+        <md-datepicker md-placeholder="To" ng-model="ctrl.toDate"></md-datepicker>
+        <button class="btn btn-default" ng-click="ctrl.clearFilters()">Clear</button>
+      </div>
+      <table class="table">
+        <thead>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="trans in ctrl.transactions">
+            <td ng-bind="trans.timestamp | date"></td>
+            <td ng-bind="trans.description"></td>
+            <td ng-bind="trans.amount | currency"></td>
+            <td>
+              <md-menu>
+                <button type="button" class="btn btn-default" ng-click="$mdOpenMenu($event)">
+                  <i class="fa fa-bars"></i>
+                </button>
+                <md-menu-content width="2">
+                  <md-menu-item>
+                    <md-button ng-click="ctrl.editTransaction(trans)">
+                      <i class="fa fa-pencil"></i><span> Edit</span>
+                    </md-button>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <md-button ng-click="ctrl.deleteTransaction(trans)">
+                      <i class="fa fa-trash"></i><span> Delete</span>
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <div class="page-header">
+        <h2 class="lead">Summary</h2>
+      </div>
+      <table class="table">
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="page-header">
+        <h2 class="lead pull-left">Rates</h2>
+        <div class="pull-right">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-success" ng-click="ctrl.toggleRatesForm()"><i class="fa fa-plus"></i> Add</button>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <table class="table">
+        <thead>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="rate in ctrl.rates">
+            <td ng-bind="rate.description"></td>
+            <td ng-bind="rate.amount_per_day | currency"></td>
+            <td>
+              <md-menu>
+                <button type="button" class="btn btn-default" ng-click="$mdOpenMenu($event)">
+                  <i class="fa fa-bars"></i>
+                </button>
+                <md-menu-content width="2">
+                  <md-menu-item>
+                    <md-button ng-click="ctrl.editRate(rate)">
+                      <i class="fa fa-pencil"></i><span> Edit</span>
+                    </md-button>
+                  </md-menu-item>
+                  <md-menu-item>
+                    <md-button ng-click="ctrl.deleteRate(rate)">
+                      <i class="fa fa-trash"></i><span> Delete</span>
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="transaction">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Add Transaction</h1>
+  </md-toolbar>
+  <md-content layout-padding>
+    <form name="transForm"
+          ng-submit="ctrl.submitTransaction() ; ctrl.resetTransactionForm(transForm)"
+          md-autofocus
+          novalidate>
+      <div class="form-group">
+        <md-input-container>
+          <label>Description</label>
+          <input type="text"
+                 name="description"
+                 class="form-control"
+                 ng-model="ctrl.newTransaction.description"
+                 required>
+          <div class="text-danger" ng-messages="transForm.description.$error" ng-if="transForm.description.$touched && transForm.description.$invalid">
+            <p ng-message="required">Description is required</p>
+          </div>
+        </md-input-container>
+      </div>
+      <div class="form-group">
+        <md-input-container>
+          <label>Amount</label>
+          <input type="number"
+                 name="amount"
+                 class="form-control"
+                 ng-model="ctrl.newTransaction.amount"
+                 required>
+          <div class="text-danger" ng-messages="transForm.description.$error" ng-if="transForm.amount.$touched && transForm.amount.$invalid">
+            <p ng-message="required">Amount is required</p>
+          </div>
+        </md-input-container>
+      </div>
+      <div class="form-group">
+        <md-datepicker name="timestamp" ng-model="ctrl.newTransaction.timestamp"></md-datepicker>
+        <div class="text-danger" ng-messages="transForm.timestamp.$error" ng-if="transForm.timestamp.$touched && transForm.timestamp.$invalid">
+          <p ng-message="required">Timestamp is required</p>
+        </div>
+      </div>
+      <md-button class="md-primary md-raised" ng-disabled="transForm.$invalid">Save</button>
+    </form>
+  </md-content>
+</md-sidenav>
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="rate">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Add Rate</h1>
+  </md-toolbar>
+  <md-content layout-padding>
+    <form name="rateForm"
+          ng-submit="ctrl.submitRate() ; ctrl.resetRateForm(rateForm);"
+          novalidate md-autofocus>
+      <md-input-container>
+        <label>Description</label>
+        <input type="text"
+               name="description"
+               class="form-control"
+               ng-model="ctrl.newRate.description"
+               required>
+        <div class="text-danger" ng-messages="rateForm.description.$error" ng-if="rateForm.description.$touched && rateForm.description.$invalid">
+          <p ng-message="required">Description is required</p>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Amount</label>
+        <input type="number"
+               name="amount"
+               class="form-control"
+               ng-model="ctrl.newRate.amount"
+               required>
+        <div class="text-danger" ng-messages="rateForm.description.$error" ng-if="rateForm.amount.$touched && rateForm.amount.$invalid">
+          <p ng-message="required">Amount is required</p>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Days</label>
+        <input type="number"
+               name="days"
+               class="form-control"
+               ng-model="ctrl.newRate.days"
+               min="1"
+               required>
+        <div class="text-danger" ng-messages="rateForm.days.$error" ng-if="rateForm.days.$touched && rateForm.days.$invalid">
+          <p ng-message="required">Days is required</p>
+          <p ng-message="min">Days can't be zero or less</p>
+        </div>
+      </md-input-container>
+      <button class="btn btn-default" ng-disabled="rateForm.$invalid">Save</button>
+    </form>
+  </md-content>
+</md-sidenav>

@@ -2,9 +2,9 @@ from bennedetto.settings.common import *
 
 SECRET_KEY = 'neva-forget'
 
-INSTALLED_APPS += (
-    'debug_toolbar',
-)
+# INSTALLED_APPS += (
+#     'debug_toolbar',
+# )
 
 DEBUG = True
 ALLOWED_HOSTS = []

@@ -21,3 +21,38 @@ md-sidenav.md-locked-open {
 bd-navbar md-toolbar .md-toolbar-tools {
     background-color: #008080;
 }
+
+bd-navbar md-toolbar small {
+    color: white;
+}
+
+.nav-pills li a {
+    border-radius: 0px;
+}
+
+.nav-pills li.active * {
+    background-color: #F57F2F!important;
+    color: white;
+}
+
+.nav-pills li a {
+    color: black;
+}
+
+.nav-pills li {
+    margin-top: 0px !important;
+}
+
+.page-header .pull-right .btn-group {
+    bottom: 15px;
+    position: relative;
+    top: 15px;
+}
+
+.page-header {
+    margin-top: 0px;
+}
+
+.panel button {
+    margin-left: 20px;
+}
