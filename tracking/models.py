@@ -5,6 +5,7 @@ import datetime
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils import timezone
+import pytz
 
 from authenticating.models import User
 
@@ -68,11 +69,20 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
                            timestamp__year=date.year)
 
     def date_range(self, start, end):
+        qs = self
         zone = timezone.get_current_timezone()
-        start = datetime.datetime.combine(start, datetime.time.min)
-        end = datetime.datetime.combine(end, datetime.time.max)
-        start, end = zone.localize(start), zone.localize(end)
-        return self.filter(timestamp__gte=start, timestamp__lte=end)
+
+        if start:
+            start = datetime.datetime.combine(start, datetime.time.min)
+            start = zone.localize(start)
+            qs = qs.filter(timestamp__gte=start)
+
+        if end:
+            end = datetime.datetime.combine(end, datetime.time.max)
+            end = zone.localize(end)
+            qs = qs.filter(timestamp__lte=end.astimezone(pytz.utc))
+
+        return qs
 
     def create_from_rate_balance(self, user):
         instance = self.model()

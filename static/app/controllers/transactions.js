@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function TransactionsController($mdSidenav) {
+    function TransactionsController($mdSidenav, $scope) {
         var self = this;
 
         self.toggleRight = function() {
@@ -17,9 +17,29 @@
             self.toggleRight();
             self.sendToEdit(res);
         };
+
+        self.clearFilters = function() {
+            delete self.toDate;
+            delete self.fromDate;
+            self.reloadHandle();
+        };
+
+        self.filterIsOpen = false;
+
+        $scope.$watch(function() {
+            return angular.toJson([self.toDate, self.fromDate]);
+        }, function() {
+            if (self.reloadHandle &&
+                (self.toDate || self.fromDate)) {
+                self.reloadHandle({
+                    toDate: self.toDate,
+                    fromDate: self.fromDate
+                });
+            }
+        });
     }
 
     angular
         .module('bennedetto')
-        .controller('TransactionsController', ['$mdSidenav', TransactionsController]);
+        .controller('TransactionsController', ['$mdSidenav', '$scope', TransactionsController]);
 }());

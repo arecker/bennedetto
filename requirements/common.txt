@@ -3,3 +3,4 @@ django-flat-theme==1.1.1
 djangorestframework==3.3.1
 django-timezone-field==1.3
 pytz==2015.7
+python-dateutil==2.4.2

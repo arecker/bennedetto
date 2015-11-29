@@ -43,8 +43,9 @@
             throw 'I need an "options.resource" to build a list controller, man.';
         }
 
-        self.reloadHandle = function() {
-            options.resource.query().$promise.then(function(d) {
+        self.reloadHandle = function(filters) {
+            filters = filters || {};
+            options.resource.query(filters).$promise.then(function(d) {
                 self.collection = d;
             });
         };

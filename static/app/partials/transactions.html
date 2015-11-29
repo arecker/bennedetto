@@ -6,7 +6,18 @@
     <div class="col-md-6">
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-success" ng-click="ctrl.toggleRight()"><i class="fa fa-plus"></i> Add</button>
-      </div>
+        <button type="button"
+                class="btn btn-default"
+                ng-class="{active: ctrl.filterIsOpen}"
+                ng-click="ctrl.filterIsOpen = !ctrl.filterIsOpen"><i class="fa fa-filter"></i> Filter</button>
+      </div><br/>
+      <div class="panel" ng-show="ctrl.filterIsOpen">
+        <label>From</label>
+        <md-datepicker ng-model="ctrl.fromDate"></md-datepicker>
+        <label>To</label>
+        <md-datepicker ng-model="ctrl.toDate"></md-datepicker><br/>
+        <button class="btn btn-default" ng-click="ctrl.clearFilters()">Clear</button>
+      </div><br/>
       <bd-transactions-list reload-handle="ctrl.reloadHandle" edit="ctrl.edit"></bd-transactions-list>
     </div>
   </div>

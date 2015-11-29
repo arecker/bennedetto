@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from dateutil import parser
 
 from tracking.models import Rate, Transaction
 from tracking.serializers import (RateCreateSerializer,
@@ -38,4 +39,17 @@ class TransactionViewSet(SpecifyCreateSerializerMixin, viewsets.ModelViewSet):
 
     @restrict_to_user
     def get_queryset(self, *args, **kwargs):
-        return super(TransactionViewSet, self).get_queryset(*args, **kwargs)
+        from_date = self.request.query_params.get('fromDate', None)
+        to_date = self.request.query_params.get('toDate', None)
+
+        if from_date:
+            from_date = parser.parse(from_date)
+
+        if to_date:
+            to_date = parser.parse(to_date)
+
+        qs = super(TransactionViewSet, self).get_queryset(*args, **kwargs)
+
+        if from_date or to_date:
+            return qs.date_range(from_date, to_date)
+        return qs
