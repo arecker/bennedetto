@@ -69,8 +69,9 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
 
     def date_range(self, start, end):
         zone = timezone.get_current_timezone()
-        start = datetime.datetime.combine(start, datetime.time.min, zone)
-        end = datetime.datetime.combine(end, datetime.time.max, zone)
+        start = datetime.datetime.combine(start, datetime.time.min)
+        end = datetime.datetime.combine(end, datetime.time.max)
+        start, end = zone.localize(start), zone.localize(end)
         return self.filter(timestamp__gte=start, timestamp__lte=end)
 
     def create_from_rate_balance(self, user):
