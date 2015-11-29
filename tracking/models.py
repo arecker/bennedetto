@@ -58,6 +58,9 @@ class Rate(models.Model):
         return '{0} ({1})'.format(self.description,
                                   self.amount_per_day)
 
+    class Meta:
+        ordering = ('-amount_per_day', )
+
 
 class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
     total_by = 'amount'
@@ -128,3 +131,6 @@ class Transaction(models.Model):
     def __unicode__(self):
         return '{0} ({1})'.format(self.description,
                                   self.amount)
+
+    class Meta:
+        ordering = ('-timestamp', )
