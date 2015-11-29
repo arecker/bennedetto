@@ -6,15 +6,15 @@
     </tr>
     <tr>
       <td><strong>This Week</strong></td>
-      <td>$0.00</td>
+      <td ng-bind="summaryTableCtrl.summary.week | currency"></td>
     </tr>
     <tr>
       <td><strong>This Month</strong></td>
-      <td>$0.00</td>
+      <td ng-bind="summaryTableCtrl.summary.month | currency"></td>
     </tr>
     <tr>
       <td><strong>This Year</strong></td>
-      <td>$0.00</td>
+      <td ng-bind="summaryTableCtrl.summary.year | currency"></td>
     </tr>
   </tbody>
 </table>
