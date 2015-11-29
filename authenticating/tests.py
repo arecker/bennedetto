@@ -1,4 +1,7 @@
+import datetime
+
 from django.test import TestCase
+import pytz
 
 from authenticating.forms import UserCreationForm
 from authenticating.models import User
@@ -31,3 +34,33 @@ class SimpleTestCase(TestCase):
 
         user = User.objects.create_superuser('root@example.org', 'test42')
         self.assertTrue(user.is_staff)
+
+
+class UserModelTestCase(TestCase):
+    def test_midnight(self):
+        bill = User.objects.create_user('bill@wildstallions.com')
+        bill.timezone = pytz.timezone('US/Eastern')
+        bill.save()
+
+        ted = User.objects.create_user('ted@wildstallions.com')
+        ted.timezone = pytz.timezone('US/Pacific')
+        ted.save()
+
+        # bill's midnight
+        now = datetime.datetime(2014, 1, 1, 5, 0, 0, 0, pytz.utc)
+        actual = User.objects.midnight(now=now)
+        self.assertEqual(len(actual), 1)
+        actual = actual.first()
+        self.assertEqual(actual.email, 'bill@wildstallions.com')
+
+        # ted's midnight
+        now = datetime.datetime(2014, 1, 1, 8, 0, 0, 0, pytz.utc)
+        actual = User.objects.midnight(now=now)
+        self.assertEqual(len(actual), 1)
+        actual = actual.first()
+        self.assertEqual(actual.email, 'ted@wildstallions.com')
+
+        # neither
+        now = datetime.datetime(2014, 1, 1, 6, 0, 0, 0, pytz.utc)
+        actual = User.objects.midnight(now=now).exists()
+        self.assertFalse(actual)  # if we got here, most excellent!
