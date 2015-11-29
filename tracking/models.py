@@ -5,7 +5,6 @@ import datetime
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils import timezone
-import pytz
 
 from authenticating.models import User
 
@@ -80,7 +79,7 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
         if end:
             end = datetime.datetime.combine(end, datetime.time.max)
             end = zone.localize(end)
-            qs = qs.filter(timestamp__lte=end.astimezone(pytz.utc))
+            qs = qs.filter(timestamp__lte=end)
 
         return qs
 
