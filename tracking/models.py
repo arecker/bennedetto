@@ -62,6 +62,11 @@ class Rate(models.Model):
 class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
     total_by = 'amount'
 
+    def _days_from_today(self, days):
+        end = timezone.now()
+        start = end - datetime.timedelta(days=days)
+        return self.date_range(start, end)
+
     def date(self, date):
         return self.filter(timestamp__month=date.month,
                            timestamp__day=date.day,
@@ -69,6 +74,15 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
 
     def today(self):
         return self.date(timezone.now())
+
+    def last_week(self):
+        return self._days_from_today(7)
+
+    def last_month(self):
+        return self._days_from_today(30)
+
+    def last_year(self):
+        return self._days_from_today(365)
 
     def date_range(self, start, end):
         qs = self

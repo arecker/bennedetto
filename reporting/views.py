@@ -20,4 +20,7 @@ class ReportViewSet(ViewSet):
     @list_route(methods=['get'], url_path='summary')
     def summary(self, request):
         transactions = self._get_transactions()
-        return Response({'today': transactions.today().total()})
+        return Response({'today': transactions.today().total(),
+                         'week': transactions.last_week().total(),
+                         'month': transactions.last_month().total(),
+                         'year': transactions.last_year().total()})
