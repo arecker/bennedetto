@@ -19,7 +19,7 @@
             buildReportResource: function(name) {
                 return {
                     get: function() {
-                        return $http.get('{}reports/{}'.format(APP_SETTINGS.apiUrl, name));
+                        return $http.get('{}reports/{}/'.format(APP_SETTINGS.apiUrl, name));
                     }
                 };
             }
@@ -43,5 +43,5 @@
         .factory('ResourceFactory', ['$resource', '$http', 'APP_SETTINGS', ResourceFactory])
         .service('RatesResource', ['ResourceFactory', RatesResource])
         .service('TransactionsResource', ['ResourceFactory', TransactionsResource])
-        .service('SummaryReport', ['ResourceFactory', SummaryReport]);;
+        .service('SummaryReport', ['ResourceFactory', SummaryReport]);
 }());

@@ -10,6 +10,13 @@ describe('ResourceFactory', function() {
                 lastInvoked = path;
             };
         });
+        $provide.service('$http', function() {
+            return {
+                get: function(path) {
+                    lastInvoked = path;
+                }
+            };
+        });
     }));
 
     beforeEach(inject(function(_ResourceFactory_) {
@@ -24,6 +31,13 @@ describe('ResourceFactory', function() {
         ResourceFactory.buildResource('beers');
         var actual = lastInvoked,
             expected = '/mock/api/path/beers/:id';
+        expect(actual).toBe(expected);
+    });
+
+    it('should return the expected path for a new report resource', function() {
+        ResourceFactory.buildReportResource('beer').get();
+        var actual = lastInvoked,
+            expected = '/mock/api/path/reports/beer/';
         expect(actual).toBe(expected);
     });
 
