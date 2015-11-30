@@ -17,6 +17,11 @@
                 controller: 'ExploreController',
                 controllerAs: 'ctrl'
             })
+            .when('/profile', {
+                templateUrl: '{}app/partials/profile.html'.format(APP_SETTINGS.staticUrl),
+                controller: 'ProfileController',
+                controllerAs: 'ctrl'
+            })
             .otherwise({
                 redirectTo: '/track'
             });
