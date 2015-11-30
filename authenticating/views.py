@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse
 from django.views.generic import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import login as login_view
+from rest_framework.viewsets import ViewSet
+from rest_framework.response import Response
 
 from authenticating.forms import UserCreationForm
 
@@ -31,3 +33,9 @@ def login_with_timezone(request):
     if request.user.is_authenticated():
         request.user.activate_timezone()
     return response
+
+
+class UserViewSet(ViewSet):
+    def list(self, *args, **kwargs):
+        user = self.request.user
+        return Response({'email': user.email})
