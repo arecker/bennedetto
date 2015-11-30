@@ -46,6 +46,7 @@ class User(AbstractBaseUser):
                           default=uuid4)
 
     email = models.EmailField(unique=True)
+    verified = models.BooleanField(default=False)
     timezone = TimeZoneField(default=get_default_timezone)
     is_staff = models.BooleanField(default=False)
 

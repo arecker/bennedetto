@@ -7,6 +7,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 
 from authenticating.forms import UserCreationForm
+from authenticating.serializers import UserSerializer
 
 
 class Register(View):
@@ -38,4 +39,5 @@ def login_with_timezone(request):
 class UserViewSet(ViewSet):
     def list(self, *args, **kwargs):
         user = self.request.user
-        return Response({'email': user.email})
+        data = UserSerializer(user).data
+        return Response(data)
