@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function TrackController($scope, $mdSidenav, TransactionsResource, RatesResource) {
+    function TrackController($scope, $mdSidenav, TransactionsResource, RatesResource, DateTimeService) {
         var self = this,
 
             getEmptyTransaction = function() {
@@ -12,10 +12,23 @@
 
             getEmptyRate = function() {
                 return {};
+            },
+
+            getFilters = function() {
+                if (self.toDate || self.fromDate) {
+                    return {
+                        toDate: self.toDate,
+                        fromDate: self.fromDate
+                    };
+                } else {
+                    return undefined;
+                }
             };
 
         self.newTransaction = getEmptyTransaction();
         self.newRate = getEmptyRate();
+        self.fromDate = DateTimeService.getNaiveDate();
+        self.toDate = DateTimeService.getNaiveDate();
 
         self.reloadTransactions = function(filters) {
             TransactionsResource.query(filters).$promise.then(function(data) {
@@ -48,7 +61,7 @@
 
             promise.then(function() {
                 self.toggleTransactionForm();
-                self.reloadTransactions();
+                self.reloadTransactions(getFilters());
                 self.summaryTable.reload();
             });
         };
@@ -82,7 +95,7 @@
 
         self.deleteTransaction = function(res) {
             TransactionsResource.delete(res).$promise.then(function(){
-                self.reloadTransactions();
+                self.reloadTransactions(getFilters());
                 self.summaryTable.reload();
             });
         };
@@ -118,7 +131,7 @@
             delete self.fromDate;
         };
 
-        self.reloadTransactions();
+        self.reloadTransactions(getFilters());
         self.reloadRates();
 
         $scope.$watch(function() {
@@ -135,5 +148,5 @@
 
     angular
         .module('bennedetto')
-        .controller('TrackController', ['$scope', '$mdSidenav', 'TransactionsResource', 'RatesResource', 'SummaryReport', TrackController]);
+        .controller('TrackController', ['$scope', '$mdSidenav', 'TransactionsResource', 'RatesResource', 'DateTimeService', TrackController]);
 }());

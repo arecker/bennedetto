@@ -93,12 +93,12 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
 
         if start:
             start = datetime.datetime.combine(start, datetime.time.min)
-            start = zone.localize(start)
+            start = timezone.make_aware(start, zone)
             qs = qs.filter(timestamp__gte=start)
 
         if end:
             end = datetime.datetime.combine(end, datetime.time.max)
-            end = zone.localize(end)
+            end = timezone.make_aware(end, zone)
             qs = qs.filter(timestamp__lte=end)
 
         return qs
