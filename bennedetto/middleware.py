@@ -1,3 +1,6 @@
 class TimeZoneMiddleware(object):
     def process_request(self, request):
-        request.user.activate_timezone()
+        try:
+            request.user.activate_timezone()
+        except AttributeError:
+            pass
