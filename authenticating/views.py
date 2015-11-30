@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import login as login_view
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from rest_framework.decorators import list_route
 
 from authenticating.forms import UserCreationForm
 from authenticating.serializers import UserSerializer
@@ -41,3 +42,7 @@ class UserViewSet(ViewSet):
         user = self.request.user
         data = UserSerializer(user).data
         return Response(data)
+
+    @list_route(methods=['post'], url_path='send')
+    def send(self, request, **kwargs):
+        return Response('got it')
