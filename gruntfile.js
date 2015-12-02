@@ -115,6 +115,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-regex-replace');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.registerTask('default', ['browserify', 'cssmin', 'copy', 'regex-replace', 'jshint', 'jasmine']);
+    grunt.registerTask('build', ['browserify', 'cssmin', 'copy', 'regex-replace']);
     grunt.registerTask('test', ['jshint', 'jasmine']);
+    grunt.registerTask('default', ['build', 'test']);
 };
