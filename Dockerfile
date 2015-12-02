@@ -18,7 +18,7 @@ COPY . /usr/src/app
 RUN ln -s /usr/bin/nodejs /usr/bin/node && \
     npm install && \
     npm install -g grunt-cli && \
-    grunt
+    grunt build
 
 RUN python manage.py migrate
 
