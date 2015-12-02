@@ -1,6 +1,6 @@
 -r common.txt
 
-Django==1.8.6  # blessed version of django
+Django==1.9  # brand new version of django
 
 # Debugging packages
 ipython==4.0.0
