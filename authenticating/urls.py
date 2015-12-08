@@ -4,6 +4,6 @@ from authenticating import views
 
 urlpatterns = [
     url(r'^register/$', views.Register.as_view(), name='register'),
-    url(r'^login/$', views.login_with_timezone, name='login'),
+    url(r'^verify/(?P<key>[^/]+)/$', views.verify, name='verify'),
     url(r'^', include('django.contrib.auth.urls')),
 ]

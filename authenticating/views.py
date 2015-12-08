@@ -9,6 +9,7 @@ from rest_framework.decorators import list_route
 
 from authenticating.forms import UserCreationForm
 from authenticating.serializers import UserSerializer
+from authenticating.models import User
 
 
 class Register(View):
@@ -30,11 +31,9 @@ class Register(View):
         return render(request, self.template_name, {'form': form})
 
 
-def login_with_timezone(request):
-    response = login_view(request)
-    if request.user.is_authenticated():
-        request.user.activate_timezone()
-    return response
+def verify(request, key):
+    User.objects.verify(key)
+    return render(request, 'registration/verified.html')
 
 
 class UserViewSet(ViewSet):

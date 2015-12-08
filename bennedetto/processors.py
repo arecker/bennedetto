@@ -7,6 +7,7 @@ def constants(request):
     into template context
     '''
     return {'DEBUG': settings.DEBUG,
+            'DOMAIN': settings.DOMAIN,
             'API_URL': settings.API_URL,
             'STATIC_URL': settings.STATIC_URL,
             'VERSION': settings.VERSION}

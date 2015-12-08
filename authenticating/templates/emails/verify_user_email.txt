@@ -1,0 +1,5 @@
+Hi {{ user.email }},
+
+I please follow the link to verify your account.
+
+{{ user.get_verify_link }}

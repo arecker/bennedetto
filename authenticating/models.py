@@ -5,8 +5,11 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from timezone_field import TimeZoneField
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 import pytz
 
+from authenticating.email import VerifyUserEmail
+from bennedetto.utils import expand_url_path
 
 def get_default_timezone():
     return pytz.timezone('US/Central')
@@ -36,6 +39,11 @@ class UserManager(BaseUserManager):
                  if now.astimezone(pytz.timezone(tz)).hour == 0]
         return self.filter(timezone__in=zones)
 
+    def verify(self, key):
+        user = self.get(verify_key=key)
+        user.verified = True
+        user.save()
+
 
 class User(AbstractBaseUser):
     objects = UserManager()
@@ -47,6 +55,7 @@ class User(AbstractBaseUser):
 
     email = models.EmailField(unique=True)
     verified = models.BooleanField(default=False)
+    verify_key = models.UUIDField(default=uuid4, editable=False, unique=True)
     timezone = TimeZoneField(default=get_default_timezone)
     is_staff = models.BooleanField(default=False)
 
@@ -67,3 +76,13 @@ class User(AbstractBaseUser):
 
     def activate_timezone(self):
         timezone.activate(self.timezone)
+
+    def send_verification_email(self):
+        if self.verified:
+            return False
+        VerifyUserEmail(user=self).send()
+
+    def get_verify_link(self):
+        key = str(self.verify_key)
+        path = reverse('verify', args=[key])
+        return expand_url_path(path)
