@@ -14,32 +14,11 @@
         };
     }
 
-    function bdRatesPieController($scope) {
+    function bdRatesPieController($scope, ColorService) {
         var self = this, data, chart,
 
             clearData = function() {
                 data = [];
-            },
-
-            getRandomValue = function() {
-                var max = 150, min = 100;
-                return Math.floor(Math.random() * (max - min + 1)) + min;
-            },
-
-            getGreenColor = function() {
-                return 'rgb(0,{},0)'.format(getRandomValue());
-            },
-
-            getRedColor = function() {
-                return 'rgb({},0,0)'.format(getRandomValue());
-            },
-
-            getColorForRate = function(obj) {
-                if (Number(obj.amount_per_day) > 0) {
-                    return getGreenColor();
-                } else {
-                    return getRedColor();
-                }
             },
 
             unpackRates = function() {
@@ -47,7 +26,7 @@
                     data.push({
                         value: obj.amount_per_day,
                         label: obj.description,
-                        color: getColorForRate(obj)
+                        color: ColorService.getColorForAmount(obj.amount)
                     });
                 });
             },
@@ -72,6 +51,6 @@
 
     angular
         .module('bennedetto')
-        .controller('bdRatesPieController', ['$scope', bdRatesPieController])
+        .controller('bdRatesPieController', ['$scope', 'ColorService', bdRatesPieController])
         .directive('bdRatesPie', ['StaticService', bdRatesPie]);
 }());
