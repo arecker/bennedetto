@@ -10,7 +10,7 @@ install-dev:
 install-js:
 	npm install
 build-js:
-	grunt
+	grunt build
 migrate:
 	${manage} migrate
 run:
