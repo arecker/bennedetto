@@ -25,6 +25,9 @@
                 }
             };
 
+        self.positiveTrans = false;
+        self.positiveRate = false;
+
         self.newTransaction = getEmptyTransaction();
         self.newRate = getEmptyRate();
         self.fromDate = DateTimeService.getNaiveDate();
@@ -53,6 +56,10 @@
         self.submitTransaction = function() {
             var promise;
 
+            if (!self.positiveTrans) {
+                self.newTransaction.amount = self.newTransaction.amount * -1;
+            }
+
             if (self.newTransaction.id) {
                 promise = TransactionsResource.update(self.newTransaction).$promise;
             } else {
@@ -68,6 +75,10 @@
 
         self.submitRate = function() {
             var promise;
+
+            if (!self.positiveRate) {
+                self.newRate.amount = self.newRate.amount * -1;
+            }
 
             if (self.newRate.id) {
                 promise = RatesResource.update(self.newRate).$promise;
@@ -105,10 +116,12 @@
         };
 
         self.editTransaction = function(res) {
+            var amount = Number(res.amount);
+            self.positiveTrans = (amount > 0);
             self.newTransaction = {
                 id: res.id,
                 description: res.description,
-                amount: Number(res.amount),
+                amount: Math.abs(amount),
                 timestamp: new Date(res.timestamp),
                 user: res.user
             };
@@ -116,10 +129,12 @@
         };
 
         self.editRate = function(res) {
+            var amount = Number(res.amount);
+            self.positiveRate = (amount > 0);
             self.newRate = {
                 id: res.id,
                 description: res.description,
-                amount: Number(res.amount),
+                amount: Math.abs(amount),
                 days: Number(res.days),
                 user: res.user
             };

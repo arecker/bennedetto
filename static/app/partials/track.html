@@ -132,6 +132,10 @@
           </div>
         </md-input-container>
       </div>
+      <md-switch ng-model="ctrl.positiveTrans" aria-label="positive">
+        <span ng-show="ctrl.positiveTrans === false">negative</span>
+        <span ng-show="ctrl.positiveTrans === true">positive</span>
+      </md-switch>
       <div class="form-group">
         <md-input-container>
           <label>Amount</label>
@@ -174,6 +178,10 @@
           <p ng-message="required">Description is required</p>
         </div>
       </md-input-container>
+      <md-switch ng-model="ctrl.positiveRate" aria-label="positive">
+        <span ng-show="ctrl.positiveRate === false">negative</span>
+        <span ng-show="ctrl.positiveRate === true">positive</span>
+      </md-switch>
       <md-input-container>
         <label>Amount</label>
         <input type="number"
