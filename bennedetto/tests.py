@@ -9,12 +9,12 @@ class UtilsTestCase(SimpleTestCase):
         domain = 'test.com:8080'
 
         actual = expand_url_path(path, domain=domain)
-        expected = '//test.com:8080/test/one/'
+        expected = 'test.com:8080/test/one/'
         self.assertEqual(actual, expected)
 
         path = '/test/two/'
         domain = 'test.com'
 
         actual = expand_url_path(path, domain=domain)
-        expected = '//test.com/test/two/'
+        expected = 'test.com/test/two/'
         self.assertEqual(actual, expected)

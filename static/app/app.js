@@ -20,7 +20,14 @@
             .when('/profile', {
                 templateUrl: '{}app/partials/profile.html'.format(APP_SETTINGS.staticUrl),
                 controller: 'ProfileController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                resolve: {
+                    user: function(UserResourceFactory) {
+                        return UserResourceFactory.buildUserProfile().then(function(d) {
+                            return d.data;
+                        });
+                    }
+                }
             })
             .otherwise({
                 redirectTo: '/track'

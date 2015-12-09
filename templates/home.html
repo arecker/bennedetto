@@ -23,7 +23,8 @@
  angular.module('bennedetto').constant('APP_SETTINGS', {
      apiUrl: '{{ API_URL }}',
      staticUrl: '{{ STATIC_URL }}',
-     version: '{{ VERSION }}'
+     version: '{{ VERSION }}',
+     email: '{{ request.user.email }}'
  });
 </script>
 {% endblock %}

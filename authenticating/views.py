@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic import View
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.views import login as login_view
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import list_route
@@ -44,4 +43,5 @@ class UserViewSet(ViewSet):
 
     @list_route(methods=['post'], url_path='send')
     def send(self, request, **kwargs):
-        return Response('got it')
+        request.user.send_verification_email()
+        return Response('verification email sent')

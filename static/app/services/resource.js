@@ -38,10 +38,28 @@
         return ResourceFactory.buildReportResource('summary');
     }
 
+    function UserResourceFactory($http, APP_SETTINGS) {
+        var endPoint = '{}user/'.format(APP_SETTINGS.apiUrl),
+
+            sendVerificationEmail = function() {
+                return $http.post('{}send/'.format(endPoint));
+            };
+
+        return {
+            buildUserProfile: function() {
+                return $http.get(endPoint).success(function(data) {
+                    data.sendVerificationEmail = sendVerificationEmail;
+                    return data;
+                });
+            }
+        };
+    }
+
     angular
         .module('bennedetto')
         .factory('ResourceFactory', ['$resource', '$http', 'APP_SETTINGS', ResourceFactory])
         .service('RatesResource', ['ResourceFactory', RatesResource])
+        .service('UserResourceFactory', ['$http', 'APP_SETTINGS', UserResourceFactory])
         .service('TransactionsResource', ['ResourceFactory', TransactionsResource])
         .service('SummaryReport', ['ResourceFactory', SummaryReport]);
 }());

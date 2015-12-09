@@ -8,4 +8,5 @@ from django.conf import settings
 
 def expand_url_path(path, domain=None):
     domain = domain or settings.DOMAIN
-    return urljoin('//{}'.format(domain), path)
+    url = urljoin('//{}'.format(domain), path)
+    return url[2:]

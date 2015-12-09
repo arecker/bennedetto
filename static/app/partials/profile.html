@@ -2,4 +2,27 @@
   <div class="page-header">
     <h2 class="lead">Profile</h2>
   </div>
+  <div class="row">
+    <div class="col-md-6" ng-show="!ctrl.user.verified">
+      <div class="panel panel-default">
+        <div class="panel-heading">Verify your email</div>
+        <div class="panel-body">
+          <p>You should verify your email.
+            Otherwise, it won't be possible to reset
+            your password.</p>
+        </div>
+        <div class="panel-footer text-right" ng-show="!ctrl.emailSent">
+          <button class="btn btn-success" ng-click="ctrl.verify()">Send an email to {{ ctrl.user.email }}</button>
+        </div>
+        <div class="panel-footer text-right" ng-show="ctrl.emailSent">
+          <button class="btn btn-success" ng-disabled="true">Email Sent</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" ng-show="ctrl.user.verified">
+      <div class="alert alert-success" role="alert">
+        Email is verified
+      </div>
+    </div>
+  </div>
 </div>

@@ -26,6 +26,8 @@
         self.toggleSideNav = function(id) {
             $mdSidenav(id).toggle();
         };
+
+        self.email = APP_SETTINGS.email;
     }
 
     angular
