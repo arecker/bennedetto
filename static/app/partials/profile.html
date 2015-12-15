@@ -24,5 +24,30 @@
         Email is verified
       </div>
     </div>
+    <div class="col-md-6" ng-show="ctrl.user.verified">
+      <div class="panel panel-default">
+        <div class="panel-heading">Change Password</div>
+        <div class="panel-body">
+          <div class="alert alert-danger" ng-show="ctrl.error" ng-bind="ctrl.error"></div>
+          <div class="alert alert-success" ng-show="ctrl.success" ng-bind="ctrl.success"></div>
+          <md-input-container>
+            <label>Old Password</label>
+            <input type="password" ng-model="ctrl.passwordChange.old" />
+          </md-input-container>
+          <md-input-container>
+            <label>New Password</label>
+            <input type="password" ng-model="ctrl.passwordChange.new1" />
+          </md-input-container>
+          <md-input-container>
+            <label>Confirm</label>
+            <input type="password" ng-model="ctrl.passwordChange.new2" />
+          </md-input-container>
+        </div>
+        <div class="panel-footer text-right">
+          <button class="btn btn-default" ng-click="ctrl.newPasswordForm()">Clear</button>
+          <button class="btn btn-success" ng-click="ctrl.changePasswordClick()" ng-disabled="!ctrl.valid">Submit</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

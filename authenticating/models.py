@@ -15,6 +15,14 @@ def get_default_timezone():
     return pytz.timezone('US/Central')
 
 
+class PasswordsDontMatch(Exception):
+    pass
+
+
+class IncorrectPassword(Exception):
+    pass
+
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
         user = self.model(email=email)
@@ -86,3 +94,16 @@ class User(AbstractBaseUser):
         key = str(self.verify_key)
         path = reverse('verify', args=[key])
         return expand_url_path(path)
+
+    def change_password(self, old, new):
+        new, new_copy = new
+        if not new == new_copy:
+            raise PasswordsDontMatch
+
+        if not self.check_password(old):
+            raise IncorrectPassword
+
+        self.set_password(new)
+
+        self.save()
+        return self

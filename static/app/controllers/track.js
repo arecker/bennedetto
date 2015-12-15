@@ -118,6 +118,7 @@
         self.editTransaction = function(res) {
             var amount = Number(res.amount);
             self.positiveTrans = (amount > 0);
+
             self.newTransaction = {
                 id: res.id,
                 description: res.description,

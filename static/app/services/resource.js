@@ -43,11 +43,16 @@
 
             sendVerificationEmail = function() {
                 return $http.post('{}send/'.format(endPoint));
+            },
+
+            changePassword = function(params) {
+                return $http.post('{}password/'.format(endPoint), angular.toJson(params));
             };
 
         return {
             buildUserProfile: function() {
                 return $http.get(endPoint).success(function(data) {
+                    data.changePassword = changePassword;
                     data.sendVerificationEmail = sendVerificationEmail;
                     return data;
                 });
