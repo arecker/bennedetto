@@ -1,10 +1,6 @@
 temp/*
 !temp/.keep
 node_modules
-static/fonts
-static/vendor.min.css
-static/vendor.js
-static/vendor-debug.js
 *.pyc
 .tox
 .grunt
