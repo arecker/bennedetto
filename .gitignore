@@ -9,3 +9,4 @@ static/vendor-debug.js
 .tox
 .grunt
 _SpecRunner.html
+.tern-port

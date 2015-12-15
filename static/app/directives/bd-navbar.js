@@ -12,7 +12,7 @@
         };
     }
 
-    function bdNavbarController($location, $mdSidenav, APP_SETTINGS) {
+    function bdNavbarController($location, $mdSidenav, $window, APP_SETTINGS) {
         var self = this;
 
         self.version = APP_SETTINGS.version;
@@ -27,11 +27,19 @@
             $mdSidenav(id).toggle();
         };
 
+        self.redirectProfile = function() {
+            $location.path('/profile');
+        };
+
+        self.redirectSignOut = function() {
+            $window.location.href = APP_SETTINGS.logoutUrl;
+        };
+
         self.email = APP_SETTINGS.email;
     }
 
     angular
         .module('bennedetto')
-        .controller('bdNavbarController', ['$location', '$mdSidenav', 'APP_SETTINGS', bdNavbarController])
+        .controller('bdNavbarController', ['$location', '$mdSidenav', '$window', 'APP_SETTINGS', bdNavbarController])
         .directive('bdNavbar', ['StaticService', bdNavbar]);
 }());

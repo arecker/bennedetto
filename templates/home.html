@@ -23,6 +23,7 @@
  angular.module('bennedetto').constant('APP_SETTINGS', {
      apiUrl: '{{ API_URL }}',
      staticUrl: '{{ STATIC_URL }}',
+     logoutUrl: '{% url 'logout' %}',
      version: '{{ VERSION }}',
      email: '{{ request.user.email }}'
  });
