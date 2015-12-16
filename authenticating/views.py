@@ -57,9 +57,11 @@ class UserViewSet(ViewSet):
         try:
             user = request.user.change_password(old=old, new=(new1, new2))
         except IncorrectPassword:
-            return Response('Incorrect password', status=status.HTTP_401_UNAUTHORIZED)
+            return Response('Incorrect password',
+                            status=status.HTTP_401_UNAUTHORIZED)
         except PasswordsDontMatch:
-            return Response('Passwords do not match', status=status.HTTP_400_BAD_REQUEST)
+            return Response('Passwords do not match',
+                            status=status.HTTP_400_BAD_REQUEST)
 
-        update_session_auth_hash(request, user)  # TODO: should we call this in the model?
-        return Response('password updated')
+        update_session_auth_hash(request, user)  # TODO: should we call
+        return Response('password updated')      # this in the model?
