@@ -2,6 +2,7 @@
 {% block content %}
 <p>Login</p>
 <a href="{% url 'register' %}">register</a>
+<a href="{% url 'django.contrib.auth.views.password_reset' %}">forgot password</a>
 <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
   {% csrf_token %}
   {{ form.as_p }}

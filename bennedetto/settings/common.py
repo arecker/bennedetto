@@ -4,9 +4,6 @@ THIS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.join(THIS_DIR, '..')
 
 INSTALLED_APPS = (
-    # 3rd party admin apps
-    'flat',
-
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,6 +75,7 @@ STATICFILES_DIRS = (
 )
 
 AUTH_USER_MODEL = 'authenticating.User'
+LOGIN_REDIRECT_URL = '/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

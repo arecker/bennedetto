@@ -11,6 +11,7 @@ import pytz
 from authenticating.email import VerifyUserEmail
 from bennedetto.utils import expand_url_path
 
+
 def get_default_timezone():
     return pytz.timezone('US/Central')
 
@@ -66,6 +67,7 @@ class User(AbstractBaseUser):
     verify_key = models.UUIDField(default=uuid4, editable=False, unique=True)
     timezone = TimeZoneField(default=get_default_timezone)
     is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
