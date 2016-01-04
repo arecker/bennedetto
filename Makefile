@@ -7,6 +7,8 @@ superuser:
 	${manage} createsuperuser
 install-dev:
 	${install} -r requirements/dev.txt
+install-prod:
+	${install} -r requirements/prod.txt
 migrate:
 	${manage} migrate
 run:
