@@ -2,14 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 0.3 - 2016-01-07
 ### Added
 - Docker image for testing.
 - Gitter badge by Gitter Badger.
-- This CHANGELOG.
+- This CHANGELOG
+- Some timezone support (possibly buggy)
+- transact automation script and documentation
+- Blood, sweat, and tears
 
 ### Changed
-- Various UI improvements.
+- Various UI improvements (overhauled)
+- Profile page for changing password and verifying email
+- Django upgrade to 1.9
 
 ### Removed
 - `iteritems()` as incompatible with Python 3.

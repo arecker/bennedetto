@@ -71,6 +71,23 @@ Lastly, install the project npm dependencies
 You should now be able to recompile the static resources with the
 command `grunt build`.
 
+## Running
+
+Once your create a superuser as described in the build steps, you have
+access to the site as well as the admin page.
+
+You can also register inferior users by more natural means by the
+"register" link on the login page.
+
+To automatically calculate rates and "open" each day, setup an hourly
+cronjob to trigger the `transact` job.  It should look something like
+this.
+
+    0 * * * * /path/to/python /path/to/bennedetto/manage.py transact
+
+The job is intended to run hourly to account for different timezones.
+The app should open up each user's day precisely at _their_ midnight.
+
 ## Testing
 
 To run the serverside tests
