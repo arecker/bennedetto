@@ -43,7 +43,7 @@ class UserManager(BaseUserManager):
         returns all users that are *currently* experiencing
         the first hour of their day
         '''
-        now = now or datetime.now(pytz.utc)
+        now = now or datetime.datetime.now(pytz.utc)
         zones = [tz for tz in pytz.common_timezones_set
                  if now.astimezone(pytz.timezone(tz)).hour == 0]
         return self.filter(timezone__in=zones)
