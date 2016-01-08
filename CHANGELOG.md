@@ -2,6 +2,20 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+### Added
+- Debug footer
+
+### Removed
+- datetime service
+
+### Changed
+- Fixed this CHANGELOG
+
+## 0.1 - 2015-10-20
+### Added
+- First working version of the project.
+
 ## 0.3 - 2016-01-07
 ### Added
 - Docker image for testing.
@@ -19,8 +33,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 - `iteritems()` as incompatible with Python 3.
 
-## 0.1 - 2015-10-20
-### Added
-- First working version of the project.
-
-[Unreleased]: https://github.com/arecker/bennedetto/compare/v0.1...HEAD
+[Unreleased]: https://github.com/arecker/bennedetto/compare/v0.3...HEAD
