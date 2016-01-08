@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function TrackController($scope, $mdSidenav, TransactionsResource, RatesResource, DateTimeService) {
+    function TrackController($scope, $mdSidenav, TransactionsResource, RatesResource) {
         var self = this,
 
             getEmptyTransaction = function() {
@@ -30,8 +30,8 @@
 
         self.newTransaction = getEmptyTransaction();
         self.newRate = getEmptyRate();
-        self.fromDate = DateTimeService.getNaiveDate();
-        self.toDate = DateTimeService.getNaiveDate();
+        self.fromDate = new Date();
+        self.toDate = new Date();
 
         self.reloadTransactions = function(filters) {
             TransactionsResource.query(filters).$promise.then(function(data) {
@@ -164,5 +164,5 @@
 
     angular
         .module('bennedetto')
-        .controller('TrackController', ['$scope', '$mdSidenav', 'TransactionsResource', 'RatesResource', 'DateTimeService', TrackController]);
+        .controller('TrackController', ['$scope', '$mdSidenav', 'TransactionsResource', 'RatesResource', TrackController]);
 }());
