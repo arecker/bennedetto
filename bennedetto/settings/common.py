@@ -50,7 +50,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # custom
-                'bennedetto.processors.constants'
+                'bennedetto.processors.constants',
+                'bennedetto.processors.timestamp'
             ],
         },
     },

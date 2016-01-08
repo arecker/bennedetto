@@ -1,0 +1,10 @@
+{% load tz %}
+<span>
+  <small><b>Version: </b> {{ VERSION }}</small>
+  {% localtime on %}
+  <small><b>Client: </b>{{ NOW }}</small>
+  {% endlocaltime %}
+  {% localtime off %}
+  <small><b>Server: </b>{{ NOW }}</small>
+  {% endlocaltime %}
+</span>
