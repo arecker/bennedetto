@@ -89,16 +89,13 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
 
     def date_range(self, start, end):
         qs = self
-        zone = timezone.get_current_timezone()
 
         if start:
             start = datetime.datetime.combine(start, datetime.time.min)
-            start = timezone.make_aware(start, zone)
             qs = qs.filter(timestamp__gte=start)
 
         if end:
             end = datetime.datetime.combine(end, datetime.time.max)
-            end = timezone.make_aware(end, zone)
             qs = qs.filter(timestamp__lte=end)
 
         return qs
