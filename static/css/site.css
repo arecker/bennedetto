@@ -20,7 +20,7 @@ md-sidenav.md-locked-open {
 
 bd-navbar md-toolbar .md-toolbar-tools,
 bd-navbar md-toolbar md-menu .md-mini,
-bd-navbar md-menu {
+#sitebar md-menu {
     background-color: #008080;
 }
 
