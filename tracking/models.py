@@ -76,7 +76,7 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
                            timestamp__year=date.year)
 
     def today(self):
-        return self.date(timezone.now())
+        return self._days_from_today(0)
 
     def last_week(self):
         return self._days_from_today(7)
