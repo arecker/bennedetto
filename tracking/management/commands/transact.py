@@ -17,11 +17,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         try:
             users = User.objects.midnight()
-            no_users = users.count()
+            num_users = users.count()
 
-            if no_users:
+            if num_users:
                 Transaction.objects.bulk_transact_rate_total(users)
-                logger.info('transact succeeded for {0} users'.format(no_users))
+                logger.info('transact succeeded for {0} users'.format(num_users))
             else:
                 logger.info('no users to transact')
 
