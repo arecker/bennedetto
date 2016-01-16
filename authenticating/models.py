@@ -109,3 +109,23 @@ class User(AbstractBaseUser):
 
         self.save()
         return self
+
+
+class Family(models.Model):
+    name = models.CharField(max_length=120)
+    members = models.ManyToManyField(User, through='Membership')
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Families'
+
+
+class Membership(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    family = models.ForeignKey(Family, on_delete=models.CASCADE)
+    admin = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return '{0} Membership'.format(self.family.__unicode__())
