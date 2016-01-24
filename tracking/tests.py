@@ -76,7 +76,6 @@ class TransactionTestCase(TestCase):
     def test_sum_two(self):
         self.create_transaction(amount=10)
         self.create_transaction(amount=-5, user_email="derp@example.com")
-        #TODO: ask why transactions are aggregated irregadless of user.
         actual = Transaction.objects.total()
         self.assertEqual(actual, to_decimal(5))
 

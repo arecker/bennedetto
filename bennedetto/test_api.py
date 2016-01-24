@@ -1,6 +1,4 @@
 from decimal import Decimal
-
-from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 from django.utils import timezone
 from authenticating.models import User
@@ -38,7 +36,6 @@ class TestTransactionsApi(APITestCase):
         client.force_authenticate(user=user)
 
         get_response = client.get(self.URL, format='json')
-        print get_response
         self.assertEqual(200, get_response.status_code)
         get_response.data[0]['timestamp'] = ''
         self.assertEqual(1, len(get_response.data))
