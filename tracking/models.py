@@ -87,20 +87,20 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
     def last_year(self):
         return self._days_from_today(365)
 
-    def date_range(self, start, end):
-        qs = self
+    def date_range(self, start_of_day, end_of_day):
+        query_set = self
 
-        if start:
-            start = datetime.datetime.combine(start, datetime.time.min)
-            qs = qs.filter(timestamp__gte=start)
+        if start_of_day:
+            start_of_day = datetime.datetime.combine(start_of_day, datetime.time.min)
+            query_set = query_set.filter(timestamp__gte=start_of_day)
 
-        if end:
-            end = datetime.datetime.combine(end, datetime.time.max)
-            qs = qs.filter(timestamp__lte=end)
+        if end_of_day:
+            end_of_day = datetime.datetime.combine(end_of_day, datetime.time.max)
+            query_set = query_set.filter(timestamp__lte=end_of_day)
 
-        return qs
+        return query_set
 
-    def create_from_rate_balance(self, user):
+    def create_transaction_from_rate_balance(self, user):
         instance = self.model()
         instance.description = 'Rate Total'
         instance.amount = Rate.objects.user(user).total()
@@ -108,7 +108,7 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
         return instance
 
     def bulk_transact_rate_total(self, users):
-        return self.bulk_create([self.create_from_rate_balance(user)
+        return self.bulk_create([self.create_transaction_from_rate_balance(user)
                                  for user in users])
 
 

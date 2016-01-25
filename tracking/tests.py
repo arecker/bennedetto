@@ -17,80 +17,65 @@ def to_decimal(amount, place='0.001'):
 
 
 class RateTestCase(TestCase):
+
+    def create_rate(self, description ="Test Rate", days=10, amount = 10):
+        usr = User.objects.create_user('test@example.com')
+
+        rate = Rate()
+        rate.description = description
+        rate.amount = Decimal(amount)
+        rate.days = days
+        rate.user = usr
+
+        rate.save()
+        rate.refresh_from_db()
+
+        return rate
+
     def test_total_nothing(self):
         actual = Rate.objects.total()
         self.assertEqual(actual, 0)
 
     def test_total_something(self):
-        instance = Rate()
-        instance.description = 'Test Rate'
-        instance.amount = Decimal(10)
-        instance.days = 10
-        instance.user = User.objects.create_user('test@yahoo.com')
-        instance.save()
 
+        self.create_rate(amount=10)
         actual = Rate.objects.total()
         self.assertEqual(actual, to_decimal(1))
 
     def test_calculate_amount_per_day(self):
-        instance = Rate()
-        instance.description = 'Test Rate'
-        instance.amount = Decimal(10)
-        instance.days = 10
-        instance.user = User.objects.create_user('test@yahoo.com')
-        instance.save()
-        instance.refresh_from_db()
-        self.assertEqual(instance.amount_per_day, Decimal(1))
+        instance = self.create_rate(amount=10, days=10)
+        self.assertEqual(instance.amount_per_day, to_decimal(1))
 
     def test_calculate_round_amount_per_day(self):
-        instance = Rate()
-        instance.description = 'Test Rate'
-        instance.amount = Decimal(10)
-        instance.days = 11
-        instance.user = User.objects.create_user('test@yahoo.com')
-        instance.save()
-        instance.refresh_from_db()
+        instance = self.create_rate(amount=10, days=11)
         self.assertEqual(instance.amount_per_day, to_decimal(0.909))
 
     def test_calculate_negative_amount_per_day(self):
-        instance = Rate()
-        instance.description = 'Test Rate'
-        instance.amount = Decimal(-10)
-        instance.days = 11
-        instance.user = User.objects.create_user('test@yahoo.com')
-        instance.save()
-        instance.refresh_from_db()
+        instance = self.create_rate(amount=-10, days=11)
         self.assertEqual(instance.amount_per_day, to_decimal(-0.909))
 
 
 class TransactionTestCase(TestCase):
+    def create_transaction(self, amount = 10, description = "spent dough", user_email="test@example.com"):
+        transaction = Transaction()
+        transaction.amount = Decimal(amount)
+        transaction.description = description
+        transaction.user = User.objects.create_user(user_email)
+        transaction.save()
+        return transaction
+
     def test_sum_nothing(self):
         actual = Transaction.objects.total()
         self.assertEqual(actual, 0)
 
     def test_sum_one(self):
-        mock = Transaction()
-        mock.amount = Decimal(10)
-        mock.description = 'Test'
-        mock.user = User.objects.create_user('test@yahoo.com')
-        mock.save()
-
+        self.create_transaction(amount=10)
         actual = Transaction.objects.total()
         self.assertEqual(actual, to_decimal(10))
 
     def test_sum_two(self):
-        mock = Transaction()
-        mock.amount = Decimal(10)
-        mock.description = 'Test'
-        mock.user = User.objects.create_user('test@yahoo.com')
-        mock.save()
-
-        mock2 = Transaction()
-        mock2.amount = Decimal(-5)
-        mock2.description = 'Test'
-        mock2.user = User.objects.create_user('another@yahoo.com')
-        mock2.save()
-
+        self.create_transaction(amount=10)
+        self.create_transaction(amount=-5, user_email="derp@example.com")
         actual = Transaction.objects.total()
         self.assertEqual(actual, to_decimal(5))
 
