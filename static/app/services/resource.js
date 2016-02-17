@@ -4,7 +4,7 @@
     function ResourceFactory($resource, $http, APP_SETTINGS) {
         return {
             buildResource: function(endpoint) {
-                var url = '{}{}/:id'.format(APP_SETTINGS.apiUrl, endpoint),
+                var url = '{}{}/:id/'.format(APP_SETTINGS.apiUrl, endpoint),
                     params = {
                         id: '@id'
                     },
