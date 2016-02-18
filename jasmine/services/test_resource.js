@@ -30,7 +30,7 @@ describe('ResourceFactory', function() {
     it('should return the expected path for a new resource', function() {
         ResourceFactory.buildResource('beers');
         var actual = lastInvoked,
-            expected = '/mock/api/path/beers/:id';
+            expected = '/mock/api/path/beers/:id/';
         expect(actual).toBe(expected);
     });
 
