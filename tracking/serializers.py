@@ -1,13 +1,23 @@
 from rest_framework import serializers
 from django.utils import timezone
+from pytz import utc
+from dateutil import parser
 
 from tracking.models import Rate, Transaction
 
 
 class TimeZoneDateTimeField(serializers.DateTimeField):
-    def to_native(self, value):
-        value = timezone.localtime(value)
-        return super(TimeZoneDateTimeField, self).to_native(value)
+    def to_representation(self, value):
+        local_value = timezone.localtime(value)
+        return super(TimeZoneDateTimeField, self).to_representation(local_value)
+
+    def to_internal_value(self, value):
+        if getattr(value, 'astimezone', False):
+            utc_value = value.astimezone(utc)
+        else:
+            naive = parser.parse(value)
+            utc_value = naive.astimezone(utc)
+        return super(TimeZoneDateTimeField, self).to_internal_value(utc_value)
 
 
 def assign_user(func):

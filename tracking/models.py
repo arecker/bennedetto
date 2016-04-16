@@ -67,7 +67,7 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
 
     def _days_from_today(self, days):
         end = timezone.now()
-        start = end - datetime.timedelta(days=days)
+        start = end - timezone.timedelta(days=days)
         return self.date_range(start, end)
 
     def date(self, date):
@@ -91,11 +91,11 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
         query_set = self
 
         if start_of_day:
-            start_of_day = datetime.datetime.combine(start_of_day, datetime.time.min)
+            start_of_day = timezone.datetime.combine(start_of_day, datetime.time.min)
             query_set = query_set.filter(timestamp__gte=start_of_day)
 
         if end_of_day:
-            end_of_day = datetime.datetime.combine(end_of_day, datetime.time.max)
+            end_of_day = timezone.datetime.combine(end_of_day, datetime.time.max)
             query_set = query_set.filter(timestamp__lte=end_of_day)
 
         return query_set

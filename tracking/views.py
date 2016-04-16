@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from dateutil import parser
+from pytz import utc
 
 from tracking.models import Rate, Transaction
 from tracking.serializers import (RateCreateSerializer,
@@ -43,10 +44,12 @@ class TransactionViewSet(SpecifyCreateSerializerMixin, viewsets.ModelViewSet):
         to_date = self.request.query_params.get('toDate', None)
 
         if from_date:
-            from_date = parser.parse(from_date)
+            naive_from_date = parser.parse(from_date)
+            from_date = naive_from_date.astimezone(utc)
 
         if to_date:
-            to_date = parser.parse(to_date)
+            naive_to_date = parser.parse(to_date)
+            to_date = naive_to_date.astimezone(utc)
 
         qs = super(TransactionViewSet, self).get_queryset(*args, **kwargs)
 
