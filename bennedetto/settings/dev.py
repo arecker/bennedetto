@@ -15,8 +15,6 @@ DATABASES = {
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'temp', 'email')
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'temp/static')
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
