@@ -9,7 +9,11 @@ from rest_framework import status
 
 from authenticating.forms import UserCreationForm
 from authenticating.serializers import UserSerializer
-from authenticating.models import User, PasswordsDontMatch, IncorrectPassword
+from authenticating.models import (User,
+                                   PasswordsDontMatch,
+                                   IncorrectPassword,
+                                   Membership,
+                                   Family)
 
 
 class Register(View):
@@ -65,3 +69,17 @@ class UserViewSet(ViewSet):
 
         update_session_auth_hash(request, user)  # TODO: should we call
         return Response('password updated')      # this in the model?
+
+    @list_route(methods=['post'], url_path='family')
+    def create_family(self, request, **kwargs):
+        name = request.data.get('name', None)
+
+        if Membership.objects.filter(user=request.user).exists():
+            return Response('User already in family', status=400)
+
+        if not name:
+            return Response('Name required', status=400)
+
+        Family.objects.create_from_user(user=request.user, name=name)
+
+        return Response('Family created', status=201)

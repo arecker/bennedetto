@@ -52,31 +52,12 @@
 	    Create a family account by inviting other users to join.
 	    They'll be able to view and edit the same transactions.
 	  </p>
-	  <label>Family Name</label>
 	  <div class="input-group">
-	    <input class="form-control" type="text" value=""/>
+	    <input ng-model="ctrl.familyName" class="form-control" type="text" placeholder="Family Name"/>
 	    <span class="input-group-btn">
-	      <button class="btn btn-success" type="button">Save</button>
+	      <button class="btn btn-success" type="button" ng-click="ctrl.createFamily()">Create Family</button>
 	    </span>
 	  </div>
-	  <br/>
-	  <label>Members</label>
-	  <ul class="list-group">
-	    <li class="list-group-item">
-	      <div class="input-group">
-		<input class="form-control" readonly="true" type="text" value="test@example.com"/>
-		<span class="input-group-addon">Invite Pending</span>
-	      </div>
-	    </li>
-	    <li class="list-group-item">
-	      <div class="input-group">
-		<input type="text" placeholder="email" class="form-control"/>
-		<span class="input-group-btn">
-		  <button class="btn btn-success" type="button">Send Invite</button>
-		</span>
-	      </div>
-	    </li>
-	  </ul>
 	</div>
       </div>
     </div>

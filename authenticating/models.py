@@ -111,7 +111,18 @@ class User(AbstractBaseUser):
         return self
 
 
+class FamilyManager(models.Manager):
+    def create_from_user(self, user, name):
+        family = self.create(name=name)
+        membership = Membership.objects.create(user=user,
+                                               family=family,
+                                               admin=True)
+        return membership.save()
+
+
 class Family(models.Model):
+    objects = FamilyManager()
+
     name = models.CharField(max_length=120)
     members = models.ManyToManyField(User, through='Membership')
 

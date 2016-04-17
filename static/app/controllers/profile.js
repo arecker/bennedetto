@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function ProfileController($scope, UserResourceFactory, user) {
+    function ProfileController($scope, $controller, UserResourceFactory, user) {
         var self = this,
 
             updateUser = function() {
@@ -65,9 +65,10 @@
 
         }, 500));
 
+	angular.extend(self, $controller('FamilyController', {$scope: self}));
     }
 
     angular
         .module('bennedetto')
-        .controller('ProfileController', ['$scope', 'UserResourceFactory', 'user', ProfileController]);
+        .controller('ProfileController', ['$scope', '$controller', 'UserResourceFactory', 'user', ProfileController]);
 }());
