@@ -19,11 +19,6 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6" ng-show="ctrl.user.verified">
-      <div class="alert alert-success" role="alert">
-        Email is verified
-      </div>
-    </div>
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">Change Password</div>
@@ -47,6 +42,42 @@
           <button class="btn btn-default" ng-click="ctrl.newPasswordForm()">Clear</button>
           <button class="btn btn-success" ng-click="ctrl.changePasswordClick()" ng-disabled="!ctrl.valid">Submit</button>
         </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+	<div class="panel-heading">Family</div>
+	<div class="panel-body">
+	  <p>
+	    Create a family account by inviting other users to join.
+	    They'll be able to view and edit the same transactions.
+	  </p>
+	  <label>Family Name</label>
+	  <div class="input-group">
+	    <input class="form-control" type="text" value=""/>
+	    <span class="input-group-btn">
+	      <button class="btn btn-success" type="button">Save</button>
+	    </span>
+	  </div>
+	  <br/>
+	  <label>Members</label>
+	  <ul class="list-group">
+	    <li class="list-group-item">
+	      <div class="input-group">
+		<input class="form-control" readonly="true" type="text" value="test@example.com"/>
+		<span class="input-group-addon">Invite Pending</span>
+	      </div>
+	    </li>
+	    <li class="list-group-item">
+	      <div class="input-group">
+		<input type="text" placeholder="email" class="form-control"/>
+		<span class="input-group-btn">
+		  <button class="btn btn-success" type="button">Send Invite</button>
+		</span>
+	      </div>
+	    </li>
+	  </ul>
+	</div>
       </div>
     </div>
   </div>
