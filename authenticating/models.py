@@ -57,6 +57,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    PasswordsDontMatch = PasswordsDontMatch
+    IncorrectPassword = IncorrectPassword
+
     objects = UserManager()
 
     id = models.UUIDField(primary_key=True,
@@ -102,10 +105,10 @@ class User(AbstractBaseUser):
     def change_password(self, old, new):
         new, new_copy = new
         if not new == new_copy:
-            raise PasswordsDontMatch
+            raise self.PasswordsDontMatch
 
         if not self.check_password(old):
-            raise IncorrectPassword
+            raise self.IncorrectPassword
 
         self.set_password(new)
 

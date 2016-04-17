@@ -10,8 +10,6 @@ from rest_framework import status
 from authenticating.forms import UserCreationForm
 from authenticating.serializers import UserSerializer
 from authenticating.models import (User,
-                                   PasswordsDontMatch,
-                                   IncorrectPassword,
                                    Membership,
                                    Family)
 
@@ -53,6 +51,7 @@ class UserViewSet(ViewSet):
 
     @list_route(methods=['post'], url_path='password')
     def password(self, request, **kwargs):
+        user = request.user
 
         old = request.data.get('old', None)
         new1 = request.data.get('new1', None)
@@ -60,15 +59,15 @@ class UserViewSet(ViewSet):
 
         try:
             user = request.user.change_password(old=old, new=(new1, new2))
-        except IncorrectPassword:
+        except user.IncorrectPassword:
             return Response('Incorrect password',
                             status=status.HTTP_401_UNAUTHORIZED)
-        except PasswordsDontMatch:
+        except user.PasswordsDontMatch:
             return Response('Passwords do not match',
                             status=status.HTTP_400_BAD_REQUEST)
 
-        update_session_auth_hash(request, user)  # TODO: should we call
-        return Response('password updated')      # this in the model?
+        update_session_auth_hash(request, user)
+        return Response('password updated')
 
     @list_route(methods=['post'], url_path='family')
     def create_family(self, request, **kwargs):
