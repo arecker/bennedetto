@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="!ctrl.user.membership">
       <div class="panel panel-default">
 	<div class="panel-heading">Family</div>
 	<div class="panel-body">
@@ -58,6 +58,40 @@
 	      <button class="btn btn-success" type="button" ng-click="ctrl.createFamily()">Create Family</button>
 	    </span>
 	  </div>
+	</div>
+      </div>
+    </div>
+    <div class="col-md-6" ng-show="ctrl.user.membership">
+      <div class="panel panel-default">
+	<div class="panel-heading" ng-bind="ctrl.user.membership.family_name"></div>
+	<div class="panel-body">
+	  <div ng-show="ctrl.user.membership.admin">
+	    <p>
+	      Invite users by email to your family.
+	    </p>
+	    <div class="input-group">
+	      <div class="input-group">
+		<input type="email" class="form-control" placeholder="Email" ng-model="ctrl.newMemberEmail">
+		<span class="input-group-btn">
+		  <button class="btn btn-default" type="button" ng-click="ctrl.sendInvitation()">Send Invitation</button>
+		</span>
+	      </div>
+	    </div>
+	  </div>
+
+	  <table class="table">
+	    <tr>
+	      <th>Email</th>
+	      <th>Verified</th>
+	      <th>Admin</th>
+	    </tr>
+	    <tr ng-repeat="member in ctrl.members">
+	      <td ng-bind="member.email"></td>
+	      <td ng-bind="member.verified"></td>
+	      <td ng-bind="member.admin"></td>
+	    </tr>
+	  </table>
+	  
 	</div>
       </div>
     </div>

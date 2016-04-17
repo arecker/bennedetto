@@ -8,7 +8,7 @@ from rest_framework.decorators import list_route
 from rest_framework import status
 
 from authenticating.forms import UserCreationForm
-from authenticating.serializers import UserSerializer
+from authenticating.serializers import UserSerializer, MembershipSerializer
 from authenticating.models import (User,
                                    Membership,
                                    Family)
@@ -74,11 +74,38 @@ class UserViewSet(ViewSet):
         name = request.data.get('name', None)
 
         if Membership.objects.filter(user=request.user).exists():
-            return Response('User already in family', status=400)
+            return Response('User already in family', status=status.HTTP_400_BAD_REQUEST)
 
         if not name:
-            return Response('Name required', status=400)
+            return Response('Name required', status=status.HTTP_400_BAD_REQUEST)
 
         Family.objects.create_from_user(user=request.user, name=name)
 
         return Response('Family created', status=201)
+
+    @list_route(methods=['post', 'get'], url_path='membership')
+    def membership(self, request, **kwargs):
+        if request.method == 'POST':
+            email = request.data.get('email', None)
+
+            if not email:
+                return Response('email required', status=400)
+
+            if User.objects.filter(email=email).exists():
+                return Response('user already has account', status=400)
+
+            family = request.user.membership.family
+            family.invite_user_to_family(email=email)
+
+            return Response('user invited', status=201)
+
+        elif request.method == 'GET':
+            family = request.user.membership.family
+            members = Membership.objects \
+                                .select_related('user') \
+                                .filter(family=family)
+            data = MembershipSerializer(members, many=True).data
+            return Response(data)
+
+        else:
+            return Response('Method not allowed', status=status.HTTP_405_METHOD_NOT_ALLOWED)

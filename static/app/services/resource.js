@@ -51,6 +51,14 @@
 
 	    createFamily = function(params) {
 		return $http.post('{}family/'.format(endPoint), angular.toJson(params));
+	    },
+
+	    inviteToFamily = function(params) {
+		return $http.post('{}membership/'.format(endPoint), angular.toJson(params));
+	    },
+
+	    fetchMembers = function() {
+		return $http.get('{}membership/'.format(endPoint));
 	    };
 
         return {
@@ -59,6 +67,8 @@
                     data.changePassword = changePassword;
                     data.sendVerificationEmail = sendVerificationEmail;
 		    data.createFamily = createFamily;
+		    data.inviteToFamily = inviteToFamily;
+		    data.fetchMembers = fetchMembers;
                     return data;
                 });
             }

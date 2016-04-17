@@ -134,6 +134,11 @@ class Family(models.Model):
     def __unicode__(self):
         return self.name
 
+    def invite_user_to_family(self, email=None):
+        user = User.objects.create(email=email, is_active=False)
+        Membership(user=user, family=self, admin=False).save()
+        return user.save()
+
     class Meta:
         verbose_name_plural = 'Families'
 
@@ -145,3 +150,15 @@ class Membership(models.Model):
 
     def __unicode__(self):
         return '{0} Membership'.format(self.family.__unicode__())
+
+    @property
+    def family_name(self):
+        return self.family.name
+
+    @property
+    def email(self):
+        return self.user.email
+
+    @property
+    def verified(self):
+        return self.user.verified
