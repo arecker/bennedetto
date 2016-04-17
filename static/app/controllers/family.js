@@ -13,7 +13,7 @@
 		name: $scope.familyName
 	    }).then(updateUser);
 	};
-    };
+    }
 
     angular
 	.module('bennedetto')
