@@ -10,6 +10,7 @@ from django.utils import timezone
 
 from authenticating.models import User
 
+
 class TotalByMixin(object):
     def __init__(self, *args, **kwargs):
         if not getattr(self, 'total_by', None):
@@ -89,7 +90,6 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
 
     def last_month(self):
         return self._days_from_today(30)
-
 
     def last_year(self):
         return self._days_from_today(365)
