@@ -9,7 +9,8 @@ from django.core.validators import MinValueValidator
 from django.utils import timezone
 
 from authenticating.models import User
-
+import logging
+logger = logging.getLogger(__name__)
 
 class TotalByMixin(object):
     def __init__(self, *args, **kwargs):
@@ -22,6 +23,14 @@ class TotalByMixin(object):
         expr = models.Sum(self.total_by)
         key = '{}__sum'.format(self.total_by)
         return self.aggregate(expr)[key] or 0
+
+    def total_expense(self):
+        # expr = models.Sum(F(amount))
+        negFilterStr = self.total_by + '__lt=0';
+        expr = models.Sum(self.total_by)
+        key = '{}__sum'.format(self.total_by)
+        return self.filter(amount__lt=0).aggregate(expr)[key] or 0
+
 
 
 class UserMixin(object):
@@ -85,6 +94,7 @@ class TransactionQuerySet(models.QuerySet, TotalByMixin, UserMixin):
 
     def last_month(self):
         return self._days_from_today(30)
+
 
     def last_year(self):
         return self._days_from_today(365)

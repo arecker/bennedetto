@@ -65,3 +65,7 @@ bd-navbar md-toolbar small {
 .panel button {
     margin-left: 20px;
 }
+
+.summary-expense {
+  color: #A81839;
+}
