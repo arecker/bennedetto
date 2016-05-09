@@ -1,5 +1,6 @@
 <table class="table">
   <tbody>
+    <tr><td><u>BALANCE</u></td><td></td></tr>
     <tr>
       <td><strong>Today</strong></td>
       <td ng-bind="summaryTableCtrl.summary.today | currency"></td>
@@ -15,6 +16,15 @@
     <tr>
       <td><strong>This Year</strong></td>
       <td ng-bind="summaryTableCtrl.summary.year | currency"></td>
+    </tr>
+    <tr class="summary-expense"><td><u>EXPENSES</u></td><td></td></tr>
+    <tr class="summary-expense">
+      <td><strong>This Week</strong></td>
+      <td ng-bind="summaryTableCtrl.summary.weekExpense | currency"></td>
+    </tr>
+    <tr class="summary-expense">
+      <td><strong>This Month</strong></td>
+      <td ng-bind="summaryTableCtrl.summary.monthExpense | currency"></td>
     </tr>
   </tbody>
 </table>

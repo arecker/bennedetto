@@ -23,6 +23,11 @@ class TotalByMixin(object):
         key = '{}__sum'.format(self.total_by)
         return self.aggregate(expr)[key] or 0
 
+    def total_expense(self):
+        expr = models.Sum(self.total_by)
+        key = '{}__sum'.format(self.total_by)
+        return self.filter(amount__lt=0).aggregate(expr)[key] or 0
+
 
 class UserMixin(object):
     user_by = 'user'

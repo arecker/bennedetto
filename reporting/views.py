@@ -22,5 +22,7 @@ class ReportViewSet(ViewSet):
         transactions = self._get_transactions()
         return Response({'today': transactions.today().total(),
                          'week': transactions.last_week().total(),
+                         'weekExpense': transactions.last_week().total_expense(),
                          'month': transactions.last_month().total(),
+                         'monthExpense': transactions.last_month().total_expense(),
                          'year': transactions.last_year().total()})
